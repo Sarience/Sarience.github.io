@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Sarience&#39;s Blog</title>
+  <subtitle>待到牡丹绘满月,荼蘼蔌蔌落清香</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://sarience.github.io/"/>
+  <updated>2017-04-25T13:32:05.596Z</updated>
+  <id>https://sarience.github.io/</id>
+  
+  <author>
+    <name>Sarience</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何使用SimpleScreenRecorder进行Ubuntu屏幕录制</title>
+    <link href="https://sarience.github.io/2017/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8SimpleScreenRecorder%E8%BF%9B%E8%A1%8CUbuntu%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B6/"/>
+    <id>https://sarience.github.io/2017/04/25/如何使用SimpleScreenRecorder进行Ubuntu屏幕录制/</id>
+    <published>2017-04-25T13:16:49.000Z</published>
+    <updated>2017-04-25T13:32:05.596Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天突然发现自己需要录制视频，而Ubuntu没有像Kali一样自带录频软件，所以有了这篇笔记</p>
+<h4 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h4><p>在终端中使用如下命令安装 SimpleScreenRecorder：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install simplescreenrecorder</div></pre></td></tr></table></figure></p>
+<p>如果你需要在 64 位 Ubuntu 上录制 32位 OpenGL 应用程序，请安装 simplescreenrecorder-lib:i386：</p>
+<p><code>sudo apt-get install simplescreenrecorder-lib:i386</code></p>
+<p><img src="https://sarience.github.io/img/pic/simpleScRecoder.png" alt=""></p>
+<p>画图工具也一并讲了吧，我用的是Kolourpaint，输入如下命令安装<br><code>sudo apt-get install kolourpaint4</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天突然发现自己需要录制视频，而Ubuntu没有像Kali一样自带录频软件，所以有了这篇笔记&lt;/p&gt;
+&lt;h4 id=&quot;下载和安装&quot;&gt;&lt;a href=&quot;#下载和安装&quot; class=&quot;headerlink&quot; title=&quot;下载和安装&quot;&gt;&lt;/a&gt;下载和安装&lt;/h4&gt;&lt;p&gt;在终端中
+    
+    </summary>
+    
+      <category term="Ubuntu" scheme="https://sarience.github.io/categories/Ubuntu/"/>
+    
+    
+      <category term="Ubuntu" scheme="https://sarience.github.io/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中子父类静态代码块，代码块，构造方法的执行顺序</title>
+    <link href="https://sarience.github.io/2017/04/25/Java%E4%B8%AD%E5%AD%90%E7%88%B6%E7%B1%BB%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%9D%97%EF%BC%8C%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
+    <id>https://sarience.github.io/2017/04/25/Java中子父类静态代码块，代码块，构造方法的执行顺序/</id>
+    <published>2017-04-25T12:19:36.000Z</published>
+    <updated>2017-04-25T12:33:40.873Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们来看一段代码和执行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.douya.Test;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by douya on 17-4-25.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> B();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">        <span class="keyword">static</span> &#123;</div><div class="line">            System.out.println(<span class="string">"static A"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        &#123;</div><div class="line">            System.out.println(<span class="string">"codeBlock A"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"constructor A"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">        <span class="keyword">static</span> &#123;</div><div class="line">            System.out.println(<span class="string">"static B"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        &#123;</div><div class="line">            System.out.println(<span class="string">"codeBlock B"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"constructor B"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>执行结果：</p>
+<blockquote>
+<p>static A<br>static B<br>codeBlock A<br>constructor A<br>codeBlock B<br>constructor B</p>
+</blockquote>
+<p><img src="https://sarience.github.io/img/pic/order.png" alt=""></p>
+<p>结论：<br>两大原则：</p>
+<ol>
+<li>父类先行</li>
+<li>静态方法先行</li>
+</ol>
+<p>故而执行顺序为：父类静态方法-&gt;子类静态方法-&gt;父类代码块-&gt;父类构造方法-&gt;子类代码块-&gt;子类构造方法</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们来看一段代码和执行结果：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;di
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java面向对象编程的特征(查漏补缺)</title>
+    <link href="https://sarience.github.io/2017/04/25/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9A%84%E7%89%B9%E5%BE%81-%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA/"/>
+    <id>https://sarience.github.io/2017/04/25/java面向对象编程的特征-查漏补缺/</id>
+    <published>2017-04-25T08:53:05.000Z</published>
+    <updated>2017-04-25T12:33:57.049Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><ol>
+<li>信息的隐藏以及行为实现细节的隐藏。</li>
+<li>维护数据的一致性和安全性</li>
+<li>缩小访问权限（private）,将信息私有化话之后，如果需要和其他对象之间进行交流，可以通过提供统一访问入口的方法提供给所有人统一访问方式。</li>
+</ol>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>目的：父类代码的复用。简化子类构建过程。<br>       Note:<br>        1.满足is a或者is kind of语义关系<br>        2.子类可以继承父类所具有的属性和行为。<br>        3.子类还可以具有比父类更多的特征。<br>        4.子类可以具有和父类完全同名的方法，子类可以覆盖父类本身所具有的行为。<br>        5.子类可以 具有和父类完全一致的属性。<br>        6.可以使用父类类型的变量接收子类类型的对象实例</p>
+<h4 id="引用类型数据类型转换："><a href="#引用类型数据类型转换：" class="headerlink" title="引用类型数据类型转换："></a>引用类型数据类型转换：</h4><pre><code>1.隐式：
+    父类类型的引用指向子类对象
+    ShoutAnimal an = new Dog();
+2.显示：
+    Dog d = (Dog)an;
+    Cat c = (Cat)an;
+只要满足继承关系的子父类在进行强制(显示)类型转换时，编译期语法都可以通过，但是运行时有可能出现跨种族转换(虚拟机抛出ClassCastException),为了在运行时减少类型转换异常，推荐，在使用引用类型的强制类型转换之前先使用instanceof判断是否能够进行转换。
+an instanceof ShoutAnimal :  true
+an instanceof Dog:             true
+an instanceof Cat:             false
+</code></pre><p>Tips:若子类强转为父类，则父类的引用指向子类的对象，这话没错，但是，也只能说半对，为啥，来看看这段代码和运行结果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.douya.Test;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by douya on 17-4-25.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        A b2a = <span class="keyword">new</span> B(<span class="string">"I'm B"</span>);</div><div class="line">        System.out.println(b2a.name);</div><div class="line">        b2a.pr();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">       String name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pr</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(name);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">        String  name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">B</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pr</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(name);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果:</p>
+<blockquote>
+<p>null<br>I’m B</p>
+</blockquote>
+<p>代码很简单，就是子类与父类具有共同的方法和属性，在main中，创建了一个子类对象B，隐式转换成父类A，并使用该引用b2a访问属性name，访问方法pr()。调用方法不难理解，但是调用属性肯定很多人会理解错，认为结果应该是传入的值<code>I&#39;m B</code>，但是运行结果摆在这里了，我们就好好来理解一下吧。(关于默认修饰符protect修饰的属性能不能继承请看:<a href="https://sarience.github.io/2017/04/24/Java%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E4%B8%8E%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/">传送门</a>，这里就不再展开讲了)</p>
+<ol>
+<li><p>在执行<code>new B(&quot;I&#39;m B&quot;);</code>的时候发生了什么呢，当然是先创建了父类A，后创建了子类B(若子类中有静态方法，则先执行父类的静态方法，后执行子类静态方法，然后依次执行父类代码块和构造方法，再依次执行子类代码块和构造方法：<a href="http://" target="_blank" rel="external">详情参考</a>)。</p>
+</li>
+<li><p>那么<code>A b2a</code>中的<code>b2a</code>指向的是父类还是子类B呢，一般书上都会讲是指向子类B，这样说没错，但严格意义上是指向父类的，指向子类还是父类是由类型修饰符来决定的，这里是<code>A</code>，所以，<code>b2a</code>取<code>name</code>属性取用的是父类的<code>name</code>，而父类的<code>name</code>没有赋值，即为空值null，如下图:</p>
+</li>
+</ol>
+<p><img src="https://sarience.github.io/img/pic/codingToO.png" alt=""></p>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><pre><code>1. 运行时多态
+ 相同类域的不同对象在调用相同方法时的表现不同
+方法的重写
+    1. 有子父类继承关系存在/接口和实现类关系
+    2. 子类覆盖父类的行为/实现类实现接口中的方法
+    3. 父类类型的引用指向子类对象/接口类类型的引用指向实现类的对象
+    4. 调用被 重写了的方法/调用被实现了的方法
+2. 编译时多态
+    方法的重载
+    <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">      <span class="class"><span class="keyword">class</span> <span class="title">Shape</span></span>&#123;</div><div class="line">	getArea(<span class="keyword">int</span> r)&#123;</div><div class="line">		System.out.println(<span class="string">"圆形"</span>);</div><div class="line">	&#125;</div><div class="line">	getArea(<span class="keyword">int</span> a,<span class="keyword">int</span> b)&#123;</div><div class="line">		System.out.println(<span class="string">"三角形"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;封装&quot;&gt;&lt;a href=&quot;#封装&quot; class=&quot;headerlink&quot; title=&quot;封装&quot;&gt;&lt;/a&gt;封装&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;信息的隐藏以及行为实现细节的隐藏。&lt;/li&gt;
+&lt;li&gt;维护数据的一致性和安全性&lt;/li&gt;
+&lt;li&gt;缩小访问权限（private）
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu中vim显示行号以及解决上下左右是ABCD的问题</title>
+    <link href="https://sarience.github.io/2017/04/25/Ubuntu%E4%B8%ADvim%E6%98%BE%E7%A4%BA%E8%A1%8C%E5%8F%B7%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E6%98%AFABCD%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>https://sarience.github.io/2017/04/25/Ubuntu中vim显示行号以及解决上下左右是ABCD的问题/</id>
+    <published>2017-04-25T07:18:49.000Z</published>
+    <updated>2017-04-25T08:37:18.284Z</updated>
+    
+    <content type="html"><![CDATA[<p>一开始使用vim进行文本编辑的时候，发现上下左右没有进行光标移动，而是变成了ABCD输入了，原始的vi进行光标的移动是用字母键的，而新的vim作为vi的升级版，更加符合人们的使用习惯。于是乎，我们只需将vi升级成vim便能解决问题。<br><code>sudo apt-get install vim</code></p>
+<p>恩，这个问题解决了，可是行号怎么办？别急，在命令模式下，输入<code>set nu</code>，便可以显示行号了。但是每编辑一个文件都输入一次很麻烦，有没有只配置一次就能解决的方案呢？当然有啦，如下：</p>
+<h2 id="为所有用户设置"><a href="#为所有用户设置" class="headerlink" title="为所有用户设置"></a>为所有用户设置</h2><ol>
+<li><p>进入到vim的安装文件夹<br><code>cd /usr/share/vim</code></p>
+</li>
+<li><p>编辑vimrc文件<br><code>sudo vi vimrc</code></p>
+</li>
+<li>添加你的设置，这里是<code>set nu</code><br><code>set nu  &quot;显示行数</code></li>
+</ol>
+<p><img src="https://sarience.github.io/img/pic/vimshare.png" alt=""></p>
+<h2 id="只为当前用户设置"><a href="#只为当前用户设置" class="headerlink" title="只为当前用户设置"></a>只为当前用户设置</h2><ol>
+<li>进入到当前用户的家目录<br><code>cd  ~</code></li>
+<li>编辑<code>.vimrc</code>文件，如果没有，则创建<br><code>sudo vi vimrc</code></li>
+<li>添加你的设置<br><code>set nu</code></li>
+</ol>
+<p><img src="https://sarience.github.io/img/pic/vimhome.png" alt=""></p>
+<h2 id="更多设置"><a href="#更多设置" class="headerlink" title="更多设置"></a>更多设置</h2><p>当然了，便捷设置不可能只有这一种，以下列出一部分用于参考，各取所需吧</p>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set autoindent</td>
+<td>自动缩进</td>
+</tr>
+<tr>
+<td>set smartindent</td>
+<td>智能缩进</td>
+</tr>
+<tr>
+<td>set nu</td>
+<td>“显示行数</td>
+</tr>
+<tr>
+<td>set mouse=a</td>
+<td>“自动换行</td>
+</tr>
+<tr>
+<td>set nocompatible</td>
+<td>关闭 vi 兼容模式</td>
+</tr>
+<tr>
+<td>syntax on</td>
+<td>自动语法高亮</td>
+</tr>
+<tr>
+<td>colorscheme molokai</td>
+<td>设定配色方案</td>
+</tr>
+<tr>
+<td>set number</td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td>set cursorline</td>
+<td>突出显示当前行</td>
+</tr>
+<tr>
+<td>set ruler</td>
+<td>打开状态栏标尺</td>
+</tr>
+<tr>
+<td>set shiftwidth=4</td>
+<td>设定 &lt;&lt; 和 &gt;&gt; 命令移动时的宽度为 4</td>
+</tr>
+<tr>
+<td>set softtabstop=4</td>
+<td>使得按退格键时可以一次删掉 4 个空格</td>
+</tr>
+<tr>
+<td>set tabstop=4</td>
+<td>设定 tab 长度为 4</td>
+</tr>
+<tr>
+<td>set nobackup</td>
+<td>覆盖文件时不备份</td>
+</tr>
+<tr>
+<td>set autochdir</td>
+<td>自动切换当前目录为当前文件所在的目录</td>
+</tr>
+<tr>
+<td>filetype plugin indent on</td>
+<td>开启插件</td>
+</tr>
+<tr>
+<td>set backupcopy=yes</td>
+<td>设置备份时的行为为覆盖</td>
+</tr>
+<tr>
+<td>set ignorecase smartcase</td>
+<td>搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感</td>
+</tr>
+<tr>
+<td>set nowrapscan</td>
+<td>禁止在搜索到文件两端时重新搜索</td>
+</tr>
+<tr>
+<td>set incsearch</td>
+<td>输入搜索内容时就显示搜索结果</td>
+</tr>
+<tr>
+<td>set hlsearch</td>
+<td>搜索时高亮显示被找到的文本</td>
+</tr>
+<tr>
+<td>set noerrorbells</td>
+<td>关闭错误信息响铃</td>
+</tr>
+<tr>
+<td>set novisualbell</td>
+<td>关闭使用可视响铃代替呼叫</td>
+</tr>
+<tr>
+<td>set t_vb=</td>
+<td>置空错误铃声的终端代码</td>
+</tr>
+<tr>
+<td>set showmatch</td>
+<td>插入括号时，短暂地跳转到匹配的对应括号</td>
+</tr>
+<tr>
+<td>set matchtime=2</td>
+<td>短暂跳转到匹配括号的时间</td>
+</tr>
+<tr>
+<td>set magic</td>
+<td>设置魔术</td>
+</tr>
+<tr>
+<td>set hidden</td>
+<td>允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存</td>
+</tr>
+<tr>
+<td>set guioptions-=T</td>
+<td>隐藏工具栏</td>
+</tr>
+<tr>
+<td>set guioptions-=m</td>
+<td>隐藏菜单栏</td>
+</tr>
+<tr>
+<td>set smartindent</td>
+<td>开启新行时使用智能自动缩进</td>
+</tr>
+<tr>
+<td>set backspace=indent,eol,start</td>
+<td>不设定在插入状态无法用退格键和 Delete 键删除回车符</td>
+</tr>
+<tr>
+<td>set cmdheight=1</td>
+<td>设定命令行的行数为 1</td>
+</tr>
+<tr>
+<td>set laststatus=2</td>
+<td>显示状态栏 (默认值为 1, 无法显示状态栏)</td>
+</tr>
+<tr>
+<td>“set statusline=\ %&lt;%F[%1<em>%M%</em>%n%R%H]%=\ %y\ %0(%{&amp;fileformat}\ %{&amp;encoding}\ %c:%l/%L%)\</td>
+<td>设置在状态行显示的信息</td>
+</tr>
+<tr>
+<td>“set foldenable</td>
+<td>开始折叠</td>
+</tr>
+<tr>
+<td>“set foldmethod=syntax</td>
+<td>设置语法折叠</td>
+</tr>
+<tr>
+<td>“set foldcolumn=0</td>
+<td>设置折叠区域的宽度</td>
+</tr>
+<tr>
+<td>“setlocal foldlevel=1</td>
+<td>设置折叠层数为</td>
+</tr>
+<tr>
+<td>“set foldclose=all</td>
+<td>设置为自动关闭折叠</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一开始使用vim进行文本编辑的时候，发现上下左右没有进行光标移动，而是变成了ABCD输入了，原始的vi进行光标的移动是用字母键的，而新的vim作为vi的升级版，更加符合人们的使用习惯。于是乎，我们只需将vi升级成vim便能解决问题。&lt;br&gt;&lt;code&gt;sudo apt-ge
+    
+    </summary>
+    
+      <category term="vim" scheme="https://sarience.github.io/categories/vim/"/>
+    
+    
+      <category term="vim" scheme="https://sarience.github.io/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu16安装Oracle 11g XE</title>
+    <link href="https://sarience.github.io/2017/04/25/Ubuntu16%E5%AE%89%E8%A3%85Oracle-11g-XE/"/>
+    <id>https://sarience.github.io/2017/04/25/Ubuntu16安装Oracle-11g-XE/</id>
+    <published>2017-04-25T02:37:12.000Z</published>
+    <updated>2017-04-25T03:17:43.234Z</updated>
+    
+    <content type="html"><![CDATA[<p>在学习JavaEE过程中需要用到数据库，而老师用的是Windows下的oracle XE，我用的是Ubuntu，又不想装虚拟机，所以便到oracle官网下载了安装包，并参考了一些文章，记录一下安装过程，以此作为以后的参考笔记。</p>
+<p>Tips:<em>什么是Oracle 11g XE呢？</em></p>
+<blockquote>
+<p>Oracle Database Express Edition 是Oracle Database的简装版，只有一个数据库实例XE，因此也叫Oracle Database XE。它拥有正式版的所有功能，只是在内存和数据大小上做了限制。适合初学者用来学习Oracle。</p>
+</blockquote>
+<h3 id="安装包下载与转换"><a href="#安装包下载与转换" class="headerlink" title="安装包下载与转换"></a>安装包下载与转换</h3><ol>
+<li><p>从官网下载Oracle 11g XE安装包（需要创建账户登录后才能下载），下载的文件是oracle-xe-11.2.0-1.0.x86_64.rpm.zip也可以下载我提供的下载好的<a href="http://localhost:4000/img/file/oracle/oracle-xe-11.2.0-1.0.x86_64.rpm.zip" target="_blank" rel="external">安装包</a></p>
+</li>
+<li><p>转换deb包（若下载了deb安装包，跳过此步骤：<a href="http://localhost:4000/img/file/oracle/oracle-xe_11.2.0-2_amd64.deb" target="_blank" rel="external">deb安装包地址</a>）<br>由于官方只为Linux提供了rpm安装包（适用于CentOS，Redhat，Fedora），所以需要先转化deb包。</p>
+<ol>
+<li><p><em>解压到当前目录</em><br><code>unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip</code></p>
+</li>
+<li><p><em>安装.deb与.rpm包转换工具：alien</em><br><code>sudo apt-get install alien</code></p>
+</li>
+<li><p><em>生成deb包</em><br><code>sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm</code></p>
+</li>
+<li><p><em>安装依赖类库</em><br><code>sudo apt-get install libaio1 unixodbc</code></p>
+</li>
+<li><p><em>创建配置文件</em><br>新建chkconfig文件<br>Oracle XE在Red Hat上安装时需要依赖/sbin chkconfig文件，Ubuntu没该文件安装时会报错。<br><code>sudo gedit /sbin/chkconfig</code><br>把下面内容贴进去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># Oracle 11gR2 XE installer chkconfig hack for Ubuntu</div><div class="line">file=/etc/init.d/oracle-xe</div><div class="line">if [[ ! `tail -n1 $file | grep INIT` ]]; then</div><div class="line">echo &gt;&gt; $file</div><div class="line">echo &apos;### BEGIN INIT INFO&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Provides: OracleXE&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Required-Start: $remote_fs $syslog&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Required-Stop: $remote_fs $syslog&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Default-Start: 2 3 4 5&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Default-Stop: 0 1 6&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Short-Description: Oracle 11g Express Edition&apos; &gt;&gt; $file</div><div class="line">echo &apos;### END INIT INFO&apos; &gt;&gt; $file</div><div class="line">fi</div><div class="line">update-rc.d oracle-xe defaults 80 01</div></pre></td></tr></table></figure>
+</li>
+<li><p><em>给chkconfig添加执行权限</em><br><code>sudo chmod 755 /sbin/chkconfig</code></p>
+</li>
+<li><p><em>配置内核参数</em><br>新建60-oracle.conf<br><code>sudo gedit /etc/sysctl.d/60-oracle.conf</code><br>输入下面内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Oracle 11g XE kernel parameters</span></div><div class="line">fs.file-max=6815744</div><div class="line">net.ipv4.ip_local_port_range=9000 65000</div><div class="line">kernel.sem=250 32000 100 128</div><div class="line">kernel.shmmax=4163487744</div><div class="line">net.core.rmem_default=262144</div><div class="line">net.core.rmem_max=4194304</div><div class="line">net.core.wmem_default=262144</div><div class="line">net.core.wmem_max=1048576</div><div class="line">fs.aio-max-nr=1048576</div></pre></td></tr></table></figure>
+</li>
+<li><p><em>加载内核参数：</em><br><code>sudo service procps start</code><br>执行以下语句看看内核参数是否修改成功<br><code>sudo sysctl -q fs.file-max</code><br>如果返回结果是fs.file-max = 6815744就说明修改成功了。如果不是该数值的话，可能是安装依赖库的问题。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="安装、配置端口等"><a href="#安装、配置端口等" class="headerlink" title="安装、配置端口等"></a>安装、配置端口等</h3><ol>
+<li><p>安装Oracle XE，在deb安装包所在目录的终端下执行下面的命令<br><code>sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb</code></p>
+</li>
+<li><p>配置xe端口、密码等，注意要输入数据库密码。<br><code>sudo /etc/init.d/oracle-xe configure</code></p>
+</li>
+</ol>
+<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><ol>
+<li><p>打开shell配置文件，Ubuntu默认shell是bash，配置文件是.bashrc。<br><code>sudo gedit ～/.bashrc</code></p>
+</li>
+<li><p>将以下内容复制到shell的配置文件中进去，如果原先配置过PATH环境变量的话，将现在的加进去就可以。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe</div><div class="line"><span class="built_in">export</span> ORACLE_SID=XE</div><div class="line"><span class="built_in">export</span> NLS_LANG=<span class="string">"`<span class="variable">$ORACLE_HOME</span>/bin/nls_lang.sh`"</span></div><div class="line"><span class="built_in">export</span> ORACLE_BASE=/u01/app/oracle</div><div class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$ORACLE_HOME</span>/lib:<span class="variable">$LD_LIBRARY_PATH</span></div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$ORACLE_HOME</span>/bin:<span class="variable">$PATH</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><ol>
+<li>安装完成后，oracle-xe服务是默认启动的，并且会开机自启，可以通过sysv-rc-conf这个软件来设置。（建议关机前手动关掉oracle-xe服务，不然关机会很慢）<br><code>sudo service oracle-xe start</code><br>卸载<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get remove --purge  oracle-xe</div><div class="line">rm /etc/default/oracle-xe</div><div class="line">rm –rf /u01</div></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在学习JavaEE过程中需要用到数据库，而老师用的是Windows下的oracle XE，我用的是Ubuntu，又不想装虚拟机，所以便到oracle官网下载了安装包，并参考了一些文章，记录一下安装过程，以此作为以后的参考笔记。&lt;/p&gt;
+&lt;p&gt;Tips:&lt;em&gt;什么是Orac
+    
+    </summary>
+    
+      <category term="oracle" scheme="https://sarience.github.io/categories/oracle/"/>
+    
+    
+      <category term="oracle" scheme="https://sarience.github.io/tags/oracle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java含包名类的编译与执行</title>
+    <link href="https://sarience.github.io/2017/04/24/java%E5%90%AB%E5%8C%85%E5%90%8D%E7%B1%BB%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E6%89%A7%E8%A1%8C/"/>
+    <id>https://sarience.github.io/2017/04/24/java含包名类的编译与执行/</id>
+    <published>2017-04-24T08:49:17.000Z</published>
+    <updated>2017-04-24T09:32:19.104Z</updated>
+    
+    <content type="html"><![CDATA[<p>如图，day3下有两个文件夹，一个bin，用来存放编译后的.class文件，一个src用来存放java文件<br><img src="https://sarience.github.io/img/pic/javaCompileARun.png" alt=""><br>在src下面我们写了两个带包名的java类，为Hello.java和World.java,包名均为com.douya.test<br><img src="https://sarience.github.io/img/pic/javaCompileARunsrc.png" alt=""><br>执行<code>javac -d bin src/*.java</code>将编译src下的所有的java文件，并且编译后的.class文件放在bin目录下，并在bin目录下生成相应的包路径<br><img src="https://sarience.github.io/img/pic/javaCompileARunC.png" alt=""><br><img src="https://sarience.github.io/img/pic/javaCompileARunC2.png" alt=""></p>
+<p>依次执行<code>java -cp bin com.douya.test.Hello</code>，<code>java -cp bin com.douya.test.World</code>，参数<code>-cp</code>，全称<code>-classpath</code>指定Classpath路径，这里指定为当前目录下的<code>bin</code>，要执行的类需要<code>包名加类名来访问</code>，结果如下<br><img src="https://sarience.github.io/img/pic/javaCompileARunC3.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如图，day3下有两个文件夹，一个bin，用来存放编译后的.class文件，一个src用来存放java文件&lt;br&gt;&lt;img src=&quot;https://sarience.github.io/img/pic/javaCompileARun.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;在sr
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何载Ubuntu下搭建Hexo博客</title>
+    <link href="https://sarience.github.io/2017/04/24/%E5%A6%82%E4%BD%95%E8%BD%BDUbuntu%E4%B8%8B%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/"/>
+    <id>https://sarience.github.io/2017/04/24/如何载Ubuntu下搭建Hexo博客/</id>
+    <published>2017-04-24T08:06:53.000Z</published>
+    <updated>2017-04-24T08:46:38.355Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li><p>安装Git</p>
+<blockquote>
+<p>sudo apt-get install git</p>
+</blockquote>
+</li>
+<li><p>安装NodeJs</p>
+<blockquote>
+<p>wget -qO- <a href="https://raw.github.com/creationix/nvm/master/install.sh" target="_blank" rel="external">https://raw.github.com/creationix/nvm/master/install.sh</a> | sh<br>安装完成后，重启终端<br>nvm install stable</p>
+</blockquote>
+</li>
+<li><p>安装Hexo</p>
+<blockquote>
+<p>npm install -g hexo-cli<br>npm install hexo –save</p>
+</blockquote>
+</li>
+<li><p>初始化Hexo</p>
+<blockquote>
+<p>hexo init</p>
+</blockquote>
+</li>
+<li><p>安装Hexo插件</p>
+<blockquote>
+<p>npm install hexo-generator-index –save<br>npm install hexo-generator-archive –save<br>npm install hexo-generator-category –save<br>npm install hexo-generator-tag –save<br>npm install hexo-server –save<br>npm install hexo-deployer-git –save<br>npm install hexo-deployer-heroku –save<br>npm install hexo-deployer-rsync –save<br>npm install hexo-deployer-openshift –save<br>npm install hexo-renderer-marked@0.2 –save<br>npm install hexo-renderer-stylus@0.2 –save<br>npm install hexo-generator-feed@1 –save<br>npm install hexo-generator-sitemap@1 –save<br>//安装 ejs，否则无法解析模板<br>npm install  </p>
+</blockquote>
+</li>
+<li><p>安装Hexo部署工具</p>
+<blockquote>
+<p>npm install hexo-deployer-git –save</p>
+</blockquote>
+</li>
+<li><p>生成Hexo静态文件</p>
+<blockquote>
+<p>hexo g</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p>开启Hexo本地服务，验证是否搭建成功</p>
+<blockquote>
+<p>hexo s -p 80<br>意思是在本地80端口开启hexo服务<br>浏览器访问localhost验证</p>
+</blockquote>
+</li>
+<li><p>提交到github</p>
+<ol>
+<li>创建一个名为：yourname.github.io的分支</li>
+<li>修改_config.yml文件，配置deploy的type类型为git，resp为你的分支访问方式(有两种，一种是ssh,使用密钥链接，适用于维护单个博客，方便使用;一种是https，提交需要输入您的github账户和密码，适用于维护多个博客)</li>
+<li>hexo d提交到github</li>
+</ol>
+</li>
+</ol>
+<h3 id="github提交的两种方式"><a href="#github提交的两种方式" class="headerlink" title="github提交的两种方式"></a>github提交的两种方式</h3><ol>
+<li>https<br>提交类型为https，repo填你的repository地址，如图：<br><img src="https://sarience.github.io/img/pic/hexoConstructHTTPS.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: https://github.com/Sarience/Sarience.github.io.git</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在提交的过程中，会需要你输入你的github账号和密码，账号密码正确后则提交成功</p>
+<ol>
+<li>ssh<br>提交类型为git，repo填你的repository地址，如图：<br><img src="https://sarience.github.io/img/pic/hexoConstructSSH.png" alt=""><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git<span class="meta">@github</span>.com:Sarience/Sarience.github.io.git</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在执行<code>hexo d</code>之前，先要生成rsa秘钥并且将你的秘钥添加到repository的设置中：</p>
+<pre><code>1. 执行`ssh-keygen -t rsa`，会在你的home目录下生成一个`.ssh`文件夹，其中会有两个秘钥，一个公钥，一个私钥
+2. 执行`cat ~/.ssh/id_rsa.pub`
+3. 将其内容复制并添加到repository中
+</code></pre><p>记得勾选<code>Allow write access</code><br><img src="https://sarience.github.io/img/pic/hexoConstructRSA.png" alt=""></p>
+<pre><code>4. 执行`ssh -T git@github.com`进行测试，看到`Hi [yourGithubAccount]! You&apos;ve successfully authenticated, but GitHub does not provide shell access.`说明秘钥添加成功
+5. 设置用户信息：
+`git config --global user.name &quot;[yourName]&quot;//用户名`
+`git config --global user.email  &quot;[yourEmail]&quot;//填写自己的邮箱`
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;安装Git&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo apt-get install git&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装NodeJs&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;wget -qO- &lt;a href
+    
+    </summary>
+    
+      <category term="Hexo" scheme="https://sarience.github.io/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="https://sarience.github.io/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Ubuntu 16中安装python3.6</title>
+    <link href="https://sarience.github.io/2017/04/24/%E5%9C%A8Ubuntu-16%E4%B8%AD%E5%AE%89%E8%A3%85python3-6/"/>
+    <id>https://sarience.github.io/2017/04/24/在Ubuntu-16中安装python3-6/</id>
+    <published>2017-04-24T07:54:37.000Z</published>
+    <updated>2017-04-24T08:04:55.831Z</updated>
+    
+    <content type="html"><![CDATA[<p>注意:前提Ubuntu里已经安装了python，不管版本</p>
+<ol>
+<li><p>下载python3.6.1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tgz</div><div class="line">tar -xvzf Python-3.6.1.tgz</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装一些依赖包<br>由于等会我会装virtualenv，所以在编译安装前需要装zlib和readline<br>在ubuntu里，zlib叫zlib1g，相应的zlib-devel叫zlib1g.dev</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install readline.dev</div><div class="line">sudo apt-get install zlib1g.dev</div></pre></td></tr></table></figure>
+</li>
+<li><p>编译安装python</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./configure</div><div class="line">sudo make &amp;&amp; sudo  make install</div></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;注意:前提Ubuntu里已经安装了python，不管版本&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;下载python3.6.1&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div cl
+    
+    </summary>
+    
+      <category term="Python" scheme="https://sarience.github.io/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://sarience.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何在Ubuntu中创建swap分区文件并挂载</title>
+    <link href="https://sarience.github.io/2017/04/24/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%AD%E5%88%9B%E5%BB%BAswap%E5%88%86%E5%8C%BA%E6%96%87%E4%BB%B6%E5%B9%B6%E6%8C%82%E8%BD%BD/"/>
+    <id>https://sarience.github.io/2017/04/24/如何在Ubuntu中创建swap分区文件并挂载/</id>
+    <published>2017-04-24T07:44:52.000Z</published>
+    <updated>2017-04-24T08:42:34.468Z</updated>
+    
+    <content type="html"><![CDATA[<p>通常，Linux系统中swap分区可以通过两种方式指定，分别为：<br>一、在磁盘分区的时候格式化一个swap分区；<br>二、在文件系统中创建一个swap文件作为swap分区。<br>此文主要介绍第二种方式。步骤如下：</p>
+<ol>
+<li><p>创建文件<br><code>fallocate -l 8G /swapfile</code><br>说明：8G 表示swap文件大小，/swapfile为swap文件路径和名称，可以任意指定。</p>
+</li>
+<li><p>修改文件权限<br><code>chmod 600 /swapfile</code></p>
+</li>
+<li><p>将 swapfile 初始化为交换文件<br><code>mkswap /swapfile</code></p>
+</li>
+<li><p>启用交换文件<br><code>swapon /swapfile</code></p>
+</li>
+<li><p>至此，linux系统已经将swapfile作为交换文件使用，但是重启之后是不会自动挂在刚才创建的文件的，因此需要手动修改 /etc/fstab 配置文件：<br><code>gedit /etc/fstab</code><br>在文件中添加如下内容：<br><code>/swapfile none swap sw 0 0</code></p>
+</li>
+<li><p>完成，测试下：<br><code>swapon -s</code></p>
+</li>
+</ol>
+<p>提示：<br>        如果需要卸载swap分区文件，可以使用命令：<code>swapoff /swapfile</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通常，Linux系统中swap分区可以通过两种方式指定，分别为：&lt;br&gt;一、在磁盘分区的时候格式化一个swap分区；&lt;br&gt;二、在文件系统中创建一个swap文件作为swap分区。&lt;br&gt;此文主要介绍第二种方式。步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;创建文件&lt;br&gt;&lt;c
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java参数传递与修饰符访问权限</title>
+    <link href="https://sarience.github.io/2017/04/24/Java%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E4%B8%8E%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/"/>
+    <id>https://sarience.github.io/2017/04/24/Java参数传递与修饰符访问权限/</id>
+    <published>2017-04-24T07:29:39.000Z</published>
+    <updated>2017-04-24T10:40:02.600Z</updated>
+    
+    <content type="html"><![CDATA[<p>终于想通了困扰我的String类型传递不修改值的问题了，先说说参数传递吧。</p>
+<p>如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.douya.Test;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamPass</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        String str = <span class="string">"main"</span>;</div><div class="line">        ParamPass pt = <span class="keyword">new</span> ParamPass();</div><div class="line">        System.out.println(<span class="string">"main before change1:"</span> + str);</div><div class="line">        pt.change1(str);</div><div class="line">        System.out.println(<span class="string">"main after change1:"</span> + str);</div><div class="line">        <span class="keyword">int</span> a = <span class="number">200</span>;</div><div class="line">        pt.change1(a);</div><div class="line">        System.out.println(a);</div><div class="line"></div><div class="line">        Student bfs = <span class="keyword">new</span> Student(<span class="number">20</span>, <span class="string">"BFS"</span>, <span class="keyword">false</span>);</div><div class="line">        System.out.println(<span class="string">"main before change1:"</span> + bfs);</div><div class="line">        pt.change1(bfs);</div><div class="line">        System.out.println(<span class="string">"main after change1:"</span> + bfs);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">change1</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"change1="</span> + str);</div><div class="line">        str = <span class="string">"change1"</span>;</div><div class="line">        System.out.println(<span class="string">"after change1:"</span> + str);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">change1</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"change1="</span> + a);</div><div class="line">        a = <span class="number">100</span>;</div><div class="line">        System.out.println(<span class="string">"after change1:"</span> + a);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">change1</span><span class="params">(Student student)</span> </span>&#123;</div><div class="line">        student.setAge(<span class="number">18</span>);</div><div class="line">        student.setGender(<span class="keyword">true</span>);</div><div class="line">        student.setName(<span class="string">"AFS"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">        <span class="keyword">private</span> String name;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">boolean</span> gender;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.age = age;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> age, String name, <span class="keyword">boolean</span> gender)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.age = age;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">            <span class="keyword">this</span>.gender = gender;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> age;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.age = age;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isGender</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> gender;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGender</span><span class="params">(<span class="keyword">boolean</span> gender)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.gender = gender;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"Student&#123;"</span> +</div><div class="line">                    <span class="string">"age="</span> + age +</div><div class="line">                    <span class="string">", name='"</span> + name + <span class="string">'\''</span> +</div><div class="line">                    <span class="string">", gender="</span> + gender +</div><div class="line">                    <span class="string">'&#125;'</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
+<blockquote>
+<p>main before change1:main<br>change1=main<br>after change1:change1<br>main after chan<img src="http://" alt="">ge1:main<br>change1=200<br>after change1:100<br>200<br>main before change1:Student{age=20, name=’BFS’, gender=false}<br>main after change1:Student{age=18, name=’AFS’, gender=true}</p>
+</blockquote>
+<h3 id="Java中的数据类型"><a href="#Java中的数据类型" class="headerlink" title="Java中的数据类型"></a>Java中的数据类型</h3><p>Java中有8种<strong>基本数据类型</strong>，分别为：<br><code>布尔型(boolean)</code>,<br><code>字符型(char)</code>,<br><code>数值型(分两种)</code>:</p>
+<pre><code>1. [整数类型]{byte,short,int,long},
+2. [浮点类型]{float,double}
+</code></pre><p>3种<strong>引用数据类型</strong>，分别为：</p>
+<p><code>类(class)</code>,<br><code>接口(interface)</code>,<br><code>数组</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">graph TD;</div><div class="line">数据类型--&gt;基本数据类型;</div><div class="line">数据类型--&gt;引用数据类型;</div><div class="line">引用数据类型--&gt;类;</div><div class="line">引用数据类型--&gt;接口;</div><div class="line">引用数据类型--&gt;数组;</div><div class="line">基本数据类型--&gt;数值型;</div><div class="line">数值型--&gt;整数类型;</div><div class="line">数值型--&gt;浮点类型;</div><div class="line">基本数据类型--&gt;字符型;</div><div class="line">基本数据类型--&gt;布尔型;</div></pre></td></tr></table></figure>
+<p><img src="https://sarience.github.io//img/pic/parampass1.png" alt=""></p>
+<h3 id="修饰符访问权限"><a href="#修饰符访问权限" class="headerlink" title="修饰符访问权限"></a>修饰符访问权限</h3><table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>类内部</th>
+<th>本包</th>
+<th>子类</th>
+<th>外部包</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>X</td>
+</tr>
+<tr>
+<td>default</td>
+<td>√</td>
+<td>√</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td>private</td>
+<td>√</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
+<h3 id="基本数据类型传递只传递值"><a href="#基本数据类型传递只传递值" class="headerlink" title="基本数据类型传递只传递值"></a>基本数据类型传递只传递值</h3><p>如上代码：change1(int a)()方法执行的时候，在栈中开辟了一段空间，为方法体中的局部变量a赋值为传递过来的值，方法结束后，这段空间出栈被销毁，局部变量a也被销毁，但是main()方法中的a没有被销毁，因为他们不是同一个变量，作用域不同，所处栈空间也不同。</p>
+<h3 id="引用类型传递的是地址"><a href="#引用类型传递的是地址" class="headerlink" title="引用类型传递的是地址"></a>引用类型传递的是地址</h3><p>如上代码：String作为引用类型，在调用change1(String str)()方法的时候，给方法体中的局部变量str付给main中变量str的地址，即指向字符常量“main”，重点在<code>str = &quot;change1&quot;;</code>这段代码，这句话其实执行了两句，一句是：<code>new String();</code>，另一句是:给这个<code>new String()</code>对象赋值，即<code>str=new String(&quot;change1&quot;)</code>。这意味着局部变量str的地址指向了新创建的匿名String对象，且这个对象的值为“change1”，在方法结束后，这段空间出栈被销毁，局部变量str也被销毁，匿名String对象没了引用，就变成了垃圾，等待jvm回收。</p>
+<p>对于具体的类对象，如上代码，先创建了一个学生对象，赋初始值为：age=20, name=’BFS’, gender=false，在调用change1(Student student)()方法的时候，传递变量bfs的地址过去赋给局部变量student，此时，main中的变量bfs和change1中的局部变量student指向同一个对象，即赋初始值为：age=20, name=’BFS’, gender=false的student对象。此时student调用的方法即是该对象的方法，修改的值也为该对象的值。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;终于想通了困扰我的String类型传递不修改值的问题了，先说说参数传递吧。&lt;/p&gt;
+&lt;p&gt;如下代码：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+</feed>
