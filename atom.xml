@@ -83,7 +83,7 @@
     <link href="https://sarience.github.io/2017/04/25/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9A%84%E7%89%B9%E5%BE%81-%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA/"/>
     <id>https://sarience.github.io/2017/04/25/java面向对象编程的特征-查漏补缺/</id>
     <published>2017-04-25T08:53:05.000Z</published>
-    <updated>2017-04-25T12:33:57.049Z</updated>
+    <updated>2017-04-25T13:48:27.312Z</updated>
     
     <content type="html"><![CDATA[<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><ol>
 <li>信息的隐藏以及行为实现细节的隐藏。</li>
@@ -108,7 +108,7 @@ an instanceof Cat:             false
 </blockquote>
 <p>代码很简单，就是子类与父类具有共同的方法和属性，在main中，创建了一个子类对象B，隐式转换成父类A，并使用该引用b2a访问属性name，访问方法pr()。调用方法不难理解，但是调用属性肯定很多人会理解错，认为结果应该是传入的值<code>I&#39;m B</code>，但是运行结果摆在这里了，我们就好好来理解一下吧。(关于默认修饰符protect修饰的属性能不能继承请看:<a href="https://sarience.github.io/2017/04/24/Java%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E4%B8%8E%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/">传送门</a>，这里就不再展开讲了)</p>
 <ol>
-<li><p>在执行<code>new B(&quot;I&#39;m B&quot;);</code>的时候发生了什么呢，当然是先创建了父类A，后创建了子类B(若子类中有静态方法，则先执行父类的静态方法，后执行子类静态方法，然后依次执行父类代码块和构造方法，再依次执行子类代码块和构造方法：<a href="http://" target="_blank" rel="external">详情参考</a>)。</p>
+<li><p>在执行<code>new B(&quot;I&#39;m B&quot;);</code>的时候发生了什么呢，当然是先创建了父类A，后创建了子类B(若子类中有静态方法，则先执行父类的静态方法，后执行子类静态方法，然后依次执行父类代码块和构造方法，再依次执行子类代码块和构造方法：<a href="https://sarience.github.io/2017/04/25/Java%E4%B8%AD%E5%AD%90%E7%88%B6%E7%B1%BB%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%9D%97%EF%BC%8C%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">详情参考</a>)。</p>
 </li>
 <li><p>那么<code>A b2a</code>中的<code>b2a</code>指向的是父类还是子类B呢，一般书上都会讲是指向子类B，这样说没错，但严格意义上是指向父类的，指向子类还是父类是由类型修饰符来决定的，这里是<code>A</code>，所以，<code>b2a</code>取<code>name</code>属性取用的是父类的<code>name</code>，而父类的<code>name</code>没有赋值，即为空值null，如下图:</p>
 </li>
@@ -356,7 +356,7 @@ an instanceof Cat:             false
     <link href="https://sarience.github.io/2017/04/25/Ubuntu16%E5%AE%89%E8%A3%85Oracle-11g-XE/"/>
     <id>https://sarience.github.io/2017/04/25/Ubuntu16安装Oracle-11g-XE/</id>
     <published>2017-04-25T02:37:12.000Z</published>
-    <updated>2017-04-25T03:17:43.234Z</updated>
+    <updated>2017-04-25T13:52:46.006Z</updated>
     
     <content type="html"><![CDATA[<p>在学习JavaEE过程中需要用到数据库，而老师用的是Windows下的oracle XE，我用的是Ubuntu，又不想装虚拟机，所以便到oracle官网下载了安装包，并参考了一些文章，记录一下安装过程，以此作为以后的参考笔记。</p>
 <p>Tips:<em>什么是Oracle 11g XE呢？</em></p>
@@ -364,9 +364,9 @@ an instanceof Cat:             false
 <p>Oracle Database Express Edition 是Oracle Database的简装版，只有一个数据库实例XE，因此也叫Oracle Database XE。它拥有正式版的所有功能，只是在内存和数据大小上做了限制。适合初学者用来学习Oracle。</p>
 </blockquote>
 <h3 id="安装包下载与转换"><a href="#安装包下载与转换" class="headerlink" title="安装包下载与转换"></a>安装包下载与转换</h3><ol>
-<li><p>从官网下载Oracle 11g XE安装包（需要创建账户登录后才能下载），下载的文件是oracle-xe-11.2.0-1.0.x86_64.rpm.zip也可以下载我提供的下载好的<a href="http://localhost:4000/img/file/oracle/oracle-xe-11.2.0-1.0.x86_64.rpm.zip" target="_blank" rel="external">安装包</a></p>
+<li><p>从官网下载Oracle 11g XE安装包（需要创建账户登录后才能下载），下载的文件是oracle-xe-11.2.0-1.0.x86_64.rpm.zip也可以下载我提供的下载好的<a href="http://o7glqnnuw.bkt.clouddn.com/sarience/file/oracle-xe-11.2.0-1.0.x86_64.rpm.zip" target="_blank" rel="external">安装包</a></p>
 </li>
-<li><p>转换deb包（若下载了deb安装包，跳过此步骤：<a href="http://localhost:4000/img/file/oracle/oracle-xe_11.2.0-2_amd64.deb" target="_blank" rel="external">deb安装包地址</a>）<br>由于官方只为Linux提供了rpm安装包（适用于CentOS，Redhat，Fedora），所以需要先转化deb包。</p>
+<li><p>转换deb包（若下载了deb安装包，跳过此步骤：<a href="http://o7glqnnuw.bkt.clouddn.com/sarience/file/oracle-xe_11.2.0-2_amd64.deb" target="_blank" rel="external">deb安装包地址</a>）<br>由于官方只为Linux提供了rpm安装包（适用于CentOS，Redhat，Fedora），所以需要先转化deb包。</p>
 <ol>
 <li><p><em>解压到当前目录</em><br><code>unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip</code></p>
 </li>

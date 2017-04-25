@@ -424,7 +424,7 @@ an instanceof Cat:             false
 </blockquote>
 <p>代码很简单，就是子类与父类具有共同的方法和属性，在main中，创建了一个子类对象B，隐式转换成父类A，并使用该引用b2a访问属性name，访问方法pr()。调用方法不难理解，但是调用属性肯定很多人会理解错，认为结果应该是传入的值<code>I&#39;m B</code>，但是运行结果摆在这里了，我们就好好来理解一下吧。(关于默认修饰符protect修饰的属性能不能继承请看:<a href="https://sarience.github.io/2017/04/24/Java%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E4%B8%8E%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/">传送门</a>，这里就不再展开讲了)</p>
 <ol>
-<li><p>在执行<code>new B(&quot;I&#39;m B&quot;);</code>的时候发生了什么呢，当然是先创建了父类A，后创建了子类B(若子类中有静态方法，则先执行父类的静态方法，后执行子类静态方法，然后依次执行父类代码块和构造方法，再依次执行子类代码块和构造方法：<a href="http://" target="_blank" rel="external">详情参考</a>)。</p>
+<li><p>在执行<code>new B(&quot;I&#39;m B&quot;);</code>的时候发生了什么呢，当然是先创建了父类A，后创建了子类B(若子类中有静态方法，则先执行父类的静态方法，后执行子类静态方法，然后依次执行父类代码块和构造方法，再依次执行子类代码块和构造方法：<a href="https://sarience.github.io/2017/04/25/Java%E4%B8%AD%E5%AD%90%E7%88%B6%E7%B1%BB%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%9D%97%EF%BC%8C%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">详情参考</a>)。</p>
 </li>
 <li><p>那么<code>A b2a</code>中的<code>b2a</code>指向的是父类还是子类B呢，一般书上都会讲是指向子类B，这样说没错，但严格意义上是指向父类的，指向子类还是父类是由类型修饰符来决定的，这里是<code>A</code>，所以，<code>b2a</code>取<code>name</code>属性取用的是父类的<code>name</code>，而父类的<code>name</code>没有赋值，即为空值null，如下图:</p>
 </li>
