@@ -356,7 +356,7 @@ an instanceof Cat:             false
     <link href="https://sarience.github.io/2017/04/25/Ubuntu16%E5%AE%89%E8%A3%85Oracle-11g-XE/"/>
     <id>https://sarience.github.io/2017/04/25/Ubuntu16安装Oracle-11g-XE/</id>
     <published>2017-04-25T02:37:12.000Z</published>
-    <updated>2017-04-25T13:52:46.006Z</updated>
+    <updated>2017-04-25T13:57:25.669Z</updated>
     
     <content type="html"><![CDATA[<p>在学习JavaEE过程中需要用到数据库，而老师用的是Windows下的oracle XE，我用的是Ubuntu，又不想装虚拟机，所以便到oracle官网下载了安装包，并参考了一些文章，记录一下安装过程，以此作为以后的参考笔记。</p>
 <p>Tips:<em>什么是Oracle 11g XE呢？</em></p>
