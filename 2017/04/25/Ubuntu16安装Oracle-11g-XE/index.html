@@ -427,7 +427,7 @@
 <li><p><em>配置内核参数</em><br>新建60-oracle.conf<br><code>sudo gedit /etc/sysctl.d/60-oracle.conf</code><br>输入下面内容</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Oracle 11g XE kernel parameters</span></div><div class="line">fs.file-max=6815744</div><div class="line">net.ipv4.ip_local_port_range=9000 65000</div><div class="line">kernel.sem=250 32000 100 128</div><div class="line">kernel.shmmax=4163487744</div><div class="line">net.core.rmem_default=262144</div><div class="line">net.core.rmem_max=4194304</div><div class="line">net.core.wmem_default=262144</div><div class="line">net.core.wmem_max=1048576</div><div class="line">fs.aio-max-nr=1048576</div></pre></td></tr></table></figure>
 </li>
-<li><p><em>加载内核参数：</em><br><code>sudo service procps start</code><br>执行以下语句看看内核参数是否修改成功<br><code>sudo sysctl -q fs.file-max</code><br>如果返回结果是fs.file-max = 6815744就说明修改成功了。如果不是该数值的话，可能是安装依赖库的问题。</p>
+<li><p><em>加载内核参数：</em><br><code>sudo service procps start</code><br>执行以下语句看看内核参数是否修改成功<br><code>sudo sysctl -q fs.file-max</code><br>如果返回结果是fs.file-max = 6815744就说明修改成功了。如果不是该数值的话，可能是安装依赖库的问题。(最好重启一下计算机)</p>
 </li>
 </ol>
 </li>
@@ -446,7 +446,7 @@
 </li>
 </ol>
 <h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><ol>
-<li>安装完成后，oracle-xe服务是默认启动的，并且会开机自启，可以通过sysv-rc-conf这个软件来设置。（建议关机前手动关掉oracle-xe服务，不然关机会很慢）<br><code>sudo service oracle-xe start</code><br>卸载<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get remove --purge  oracle-xe</div><div class="line">rm /etc/default/oracle-xe</div><div class="line">rm –rf /u01</div></pre></td></tr></table></figure>
+<li>安装完成后，oracle-xe服务是默认启动的，并且会开机自启，可以通过sysv-rc-conf这个软件来设置。（建议关机前手动关掉oracle-xe服务，不然关机会很慢）<br><code>sudo service oracle-xe start</code><br>(启动完毕也重启一下计算机)<br>卸载<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get remove --purge  oracle-xe</div><div class="line">rm /etc/default/oracle-xe</div><div class="line">rm –rf /u01</div></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -608,7 +608,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">10</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">13</span></a>
             </ul>
         </li>
         

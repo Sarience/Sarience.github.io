@@ -3,6 +3,250 @@
   
     
     <entry>
+      <title><![CDATA[oracle数据库导入与导出]]></title>
+      <url>/2017/05/01/oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%BC%E5%85%A5%E4%B8%8E%E5%AF%BC%E5%87%BA/</url>
+      <content type="html"><![CDATA[<h4 id="导出命令："><a href="#导出命令：" class="headerlink" title="导出命令："></a>导出命令：</h4><p>1)单表导出：exp 用户名/密码@服务器别名 tables=表名 file=d:\名称.dmp<br>例如：</p>
+<blockquote>
+<p>exp douya/douya@127.0.0.1 tables=message file=~/message.dmp<br><img src="https://sarience.github.io/img/pic/oracle_exp.png" alt=""></p>
+</blockquote>
+<p>2)多张表：exp 用户名/密码@服务器别名 tables=表名1,表名2… file=d:\名称.dmp</p>
+<blockquote>
+<p> exp douya/douya@127.0.0.1 file=~/mp.dmp tables=message,person<br><img src="https://sarience.github.io/img/pic/oracle_expmulti.png" alt=""></p>
+</blockquote>
+<p>3)完全导出：也就是数据库中的所有表都导出格式：exp 用户名/密码@服务器别名 file=d:\名称.dmp</p>
+<blockquote>
+<p>exp douya/douya@127.0.0.1 file=~/all.dmp<br><img src="https://sarience.github.io/img/pic/oracle_expall.png" alt=""></p>
+</blockquote>
+<h4 id="导入命令"><a href="#导入命令" class="headerlink" title="导入命令:"></a>导入命令:</h4><p>因为导入的内容都是dmp文件，所以未涉及到单表导入的情况，统一命令格式</p>
+<p>格式：</p>
+<blockquote>
+<p>imp 新用户名/密码@新服务器别名 file=d:\名称.dmp buffer=102400000 feedback=10000 log=d:\名称.txt full=y</p>
+</blockquote>
+<p>例：</p>
+<blockquote>
+<p>imp douya/douya@127.0.0.1 file=~/all.dmp buffer=10240000 feedback=10000 log=~/impall.txt full=y<br><img src="https://sarience.github.io/img/pic/oracle_impall.png" alt=""><br><img src="https://sarience.github.io/img/pic/oracle_impall2.png" alt=""></p>
+</blockquote>
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>buffer</td>
+<td>设置缓存大小，越大越好，它决定导入的速度</td>
+</tr>
+<tr>
+<td>full</td>
+<td>完全导入，导出表结构及存储过程等等</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      
+        <categories>
+            
+            <category> oracle </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> oracle </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[WPS for Linux（ubuntu）字体配置(字体缺失解决办法)]]></title>
+      <url>/2017/04/28/WPS-for-Linux%EF%BC%88ubuntu%EF%BC%89%E5%AD%97%E4%BD%93%E9%85%8D%E7%BD%AE-%E5%AD%97%E4%BD%93%E7%BC%BA%E5%A4%B1%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p>启动WPS for Linux后，出现提示”系统缺失字体” 。</p>
+<p>出现提示的原因是因为WPS for Linux没有自带windows的字体，只要在Linux系统中加载字体即可。</p>
+<p>具体操作步骤如下：</p>
+<ol>
+<li><p>下载缺失的字体文件，然后复制到Linux系统中的/usr/share/fonts文件夹中。<br>国外下载地址：<a href="https://www.dropbox.com/s/lfy4hvq95ilwyw5/wps_symbol_fonts.zip" target="_blank" rel="external">https://www.dropbox.com/s/lfy4hvq95ilwyw5/wps_symbol_fonts.zip</a><br>国内下载地址：<a href="http://pan.baidu.com/s/1mh0lcbY" target="_blank" rel="external">http://pan.baidu.com/s/1mh0lcbY</a><br>（上述数据来源网络，侵删）<br>下载完成后，解压并进入目录中，继续执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo cp * /usr/share/fonts</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行以下命令,生成字体的索引信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo mkfontscale</div><div class="line">sudo mkfontdir</div></pre></td></tr></table></figure>
+</li>
+<li><p>运行fc-cache命令更新字体缓存。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo <span class="built_in">fc</span>-cache</div></pre></td></tr></table></figure>
+</li>
+<li><p>重启wps即可，字体缺失的提示不再出现。</p>
+</li>
+</ol>
+<p>转载自：renwofei423</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Ubuntu </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[白色相簿2重温]]></title>
+      <url>/2017/04/26/%E7%99%BD%E8%89%B2%E7%9B%B8%E7%B0%BF2%E9%87%8D%E6%B8%A9/</url>
+      <content type="html"><![CDATA[<p>上周四把白色相簿2又重温了一遍，还是觉得很虐心，不仅仅心疼冬马和纱，也心疼小木曾雪菜・(PД`q｡)・゜。</p>
+<p>东马是最先与北原春希相互爱慕的，从他们的钢琴与吉他的合奏中不难听出来，而且东马还是春希的老师，音乐的指导引领着，只是春希并不知道那位与他合奏的那位居然是他的同桌东马，而且指导过他的吉他。冬马或许在等，等一个机会，等她有足够多的勇气去和春希表白，也或许在等春希去解开这个秘密。可惜，人生总有那么些意外，意外插入他们之间的那位歌手小木曾雪菜，在与春希的接触中被春希所吸引而爱上了春希，而冬马是那位钢琴手的秘密也无意间被春希解开。雪菜在看出春希对冬马的情义之后感觉到了危机，便下意识地与冬马较量，尤其是春希与冬马一周的和宿训练，春希的私人物品被雪菜无意间发现后，春希的醋意更浓了，而冬马也在雪菜一次次的醋意促动下在学园祭上正式接受了雪菜的挑战，甚至有主动迎战，可是在学园祭结束后，在第二教室，听了春希对雪菜的称赞，而自己被称为“那家伙”后，很难受，她再一次的退缩了，在春希睡着后吻了春希之后离去。</p>
+<p>而这一切都被雪菜看见了，雪菜在冬马离去后为春希披上了外套，并在春希醒来后表白了，而春希，在雪菜这种温柔的攻势下显得毫无还手能力，只能乖乖就擒。雪菜在这里表现出的果断让她取得了胜利，而胜利的原因还有春希面对他人的请求不善于拒绝的性格。而后的冬马一直与春希保持距离，甚至躲避，而雪菜在获得爱情后却还想着拥有与冬马之间的友谊，正是雪菜的“贪婪”更加让冬马想要逃离，而冬马的逃离却也更加地促进了春希对冬马的执着，而且春希也更加想证明冬马是不是还爱着他，因为春希觉得自己爱冬马更多一些。在雪菜的生日那天，春希得知冬马要去巴黎的消息后，去找冬马，在街道上一阵倾诉后知道冬马一直是爱着自己的，两人相拥而吻，而冬马却意外推开春希并给了一个耳光，说出了那句让我吃了一整瓶胃药的话-“你为什么那么熟练啊！”，是啊，本来你接受雪菜的表白就已经把我推开，而你熟练的吻技更加让我心痛，你是要把我推的多远你才甘心(┙&gt;∧&lt;)┙へ┻┻ 。</p>
+<p>后来的毕业典礼上，冬马给雪菜留了一封信，雪菜告诉春希后，春希对冬马的感情一下子被激发，不顾基友提醒自己还是雪菜男朋友的事实去找冬马。在寻找未果之后陷入无尽的痛苦的春希接到了冬马打来的最后一通电话，当冬马正要带着最后一丝眷恋离开的时候被春希找到，两人又是一阵倾诉，后来两人发生了关系。第二天是冬马去巴黎的日子，雪菜拉着春希去送冬马，两人在路上坦白了一切，雪菜因该是在赌最后一把吧，可惜，这次她输了，春希选择了冬马，而冬马也没有拒绝春希，两人在机场相拥而泣。冬马最终还是去了巴黎，雪菜安慰春希回家被拒后依然温柔陪伴，诶诶诶，这里我就不怎么懂了，冬马和春希只是异国恋吧，这里雪菜对春希还抱有希望还是以朋友身份呢？个人感觉是以朋友身份吧。(个人还是比较倾向于冬马吧，不服憋着，哼 (￣３￣))</p>
+<p>冬马的傲娇与春希的优柔寡断和雪菜的一如既往的温柔包容促成了整个故事的悲剧，没有谁绝对对，谁绝对错，不论春希最后是和谁在一起，对另一个人都不好受，诶等等，为什么没有百合线，我觉得冬马和雪菜在一起不错嘛，哈哈╮(╯▽╰)╭    。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 动漫 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 动漫 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Java修饰符]]></title>
+      <url>/2017/04/26/Java%E4%BF%AE%E9%A5%B0%E7%AC%A6/</url>
+      <content type="html"><![CDATA[<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><pre><code>变量：
+    1.只能是成员变量，类变量，
+    2.类的实例所共享。
+    3.在权限允许范围内可以直接通过类名.变量名的形式访问
+    4.某种意义上更类似于全局变量。
+方法：
+    1.类方法
+    2.在权限允许范围内可以直接通过类名.方法名访问    
+
+    Note：
+        static方法不能被重写为非静态的方法
+        并且static方法就算被重写也不会有多态的体现。
+    Animal an = new Cat();
+    an.shout();
+代码块：
+    static修饰的代码块在类加载的时候执行一次
+    没有static修饰的代码块在每一次构建对象时执行一次
+
+
+在所有的静态上下文中不能访问非静态的成员(变量和方法)。
+</code></pre><h3 id="静态导入："><a href="#静态导入：" class="headerlink" title="静态导入："></a>静态导入：</h3><pre><code>import static packageName.clsname.staticMember;
+</code></pre><h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><pre><code>1.变量：final修饰的变量时常量。必须进行显示初始化。
+    1.实例变量：
+        初始化过程三选一(必须且只能选一个)
+        1.声明即初始化
+            final int a = 100;
+        2.在匿名代码块中进行初始化：
+            final int a;
+            {
+                a = 100;
+            }
+        3.可以在构造器中进行显示初始化：
+            要求在类中的每一个构造器中都要进行初始化。
+    2.类变量：
+        二选一（必选）：
+        1.声明即初始化
+            static final int b = 200;
+        2.在静态代码块中初始化：
+    3.局部变量：
+        在使用之前进行显示初始化。
+2.方法：
+    final修饰的方法不能被覆盖（重写）
+3.类：
+    final修饰的类不能被继承。
+</code></pre><h3 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h3><pre><code>1.方法：抽象方法
+    1.不能有方法体
+    2.抽象方法所在类一定是抽象类。
+    3.抽象方法存在就是被覆盖的。如果子类继承了带有抽象方法的抽象类，必须对所有的抽象方法进行覆盖。
+    4.多态。
+2.类：抽象类
+    1.抽象类不能被实例化。但是可以声明抽象类类型的变量。
+    2.抽象类是对类的抽象，抽象类所具有的共有特征和行为。
+    3.抽象类存在的目的就是用来被继承，实现代码复用。
+    4.抽象类中可以有抽象方法，也可以没有。抽象类可以和普通类一模一样（拥有各种类型的变量和方法）
+    5.如果一个类继承抽象类，必须实现抽象类中所有抽象方法，或者子类本身也是抽象类。
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span></span>&#123;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span></span>&#123;</div><div class="line">&#125;</div><div class="line">	<span class="class"><span class="keyword">interface</span> <span class="title">Action</span></span>&#123;</div><div class="line">		 <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</div><div class="line">		 <span class="function"><span class="keyword">void</span> <span class="title">xxx</span><span class="params">()</span></span>;</div><div class="line">	&#125;</div><div class="line">	<span class="class"><span class="keyword">interface</span> <span class="title">USBDevice</span></span>&#123;</div><div class="line">		xx = <span class="string">""</span>; </div><div class="line">		driver();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">let</span><span class="params">()</span></span>&#123;</div><div class="line">		</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><pre><code>1.接口是比抽象类还抽象的存在，接口是抽象类的极致抽象。
+2.接口中所有的方法都是public abstracht，接口中所有的变量都是public static final
+3.接口主要用来定义标准。
+4.接口可以多继承。一个类可以实现多个接口。
+5.接口的存在本身可以规避java不能多继承的操作特点。
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">USBDevice</span></span>&#123;</div><div class="line">	String type=<span class="string">"USB"</span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">driver</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mouse</span></span>&#123;</div><div class="line">	select();</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">USBMouse</span> <span class="keyword">extends</span> <span class="title">Mouse</span> <span class="keyword">implements</span> <span class="title">USBDevice</span></span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line">	</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Computer</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">use</span><span class="params">(USBDevice usb)</span></span>&#123;</div><div class="line">		usb.driver();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>对象：
+    1.信息载体对象(域对象)
+    2.行为对象
+</code></pre><h3 id="内部类："><a href="#内部类：" class="headerlink" title="内部类："></a>内部类：</h3><pre><code>定义在类体部，方法体部，甚至比方法体更小的代码块内部的类
+1.静态内部类（内部类中最简单的形式）
+    1.声明在类体部，方法体外，并且使用static修饰的内部类
+    2.访问特点可以类比静态变量和静态方法
+    3.脱离外部类的实例独立创建
+        在外部类的外部构建内部类的实例
+            new Outer.Inner();
+        在外部类的内部构建内部类的实例
+            new Inner();
+    4.静态内部类体部可以直接访问外部类中所有的静态成员，包含私有
+2.成员内部类(实例内部类)
+    1.没有使用static修饰的内部类。
+    2.在成员内部类中不允许出现静态变量和静态方法的声明。
+        static只能用在静态常量的声明上。
+    3.成员内部类中可以访问外部类中所有的成员(变量，方法)，包含私有成员，如果在内部类中定义有和外部类同名的实例变量，访问：
+        OuterClass.this.outerMember;
+    4.构建内部类的实例，要求必须外部类的实例先存在
+        外部类的外部/外部类的静态方法：new Outer().new Inner();
+        外部类的实例方法：
+            new Inner();
+            this.new Inner();
+3.局部内部类:
+    1.定义在方法体，甚至比方法体更小的代码块中
+    2.类比局部变量。
+    3.局部内部类是所有内部类中最少使用的一种形式。
+    4.局部内部类可以访问的外部类的成员根据所在方法体不同。
+        如果在静态方法中：
+            可以访问外部类中所有静态成员，包含私有
+        如果在实例方法中：
+            可以访问外部类中所有的成员，包含私有。
+      局部内部类可以访问所在方法中定义的局部变量，但是要求局部变量必须使用final修饰。
+
+4.匿名内部类
+    1.没有名字的局部内部类。
+    2.没有class,interface,implements,extends关键字
+    3.没有构造器。
+    4.一般隐式的继承某一个父类或者实现某一个接口
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> CoreJava </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> CoreJava </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[如何使用SimpleScreenRecorder进行Ubuntu屏幕录制]]></title>
       <url>/2017/04/25/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8SimpleScreenRecorder%E8%BF%9B%E8%A1%8CUbuntu%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B6/</url>
       <content type="html"><![CDATA[<p>今天突然发现自己需要录制视频，而Ubuntu没有像Kali一样自带录频软件，所以有了这篇笔记</p>
@@ -355,7 +599,7 @@ an instanceof Cat:             false
 <li><p><em>配置内核参数</em><br>新建60-oracle.conf<br><code>sudo gedit /etc/sysctl.d/60-oracle.conf</code><br>输入下面内容</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Oracle 11g XE kernel parameters</span></div><div class="line">fs.file-max=6815744</div><div class="line">net.ipv4.ip_local_port_range=9000 65000</div><div class="line">kernel.sem=250 32000 100 128</div><div class="line">kernel.shmmax=4163487744</div><div class="line">net.core.rmem_default=262144</div><div class="line">net.core.rmem_max=4194304</div><div class="line">net.core.wmem_default=262144</div><div class="line">net.core.wmem_max=1048576</div><div class="line">fs.aio-max-nr=1048576</div></pre></td></tr></table></figure>
 </li>
-<li><p><em>加载内核参数：</em><br><code>sudo service procps start</code><br>执行以下语句看看内核参数是否修改成功<br><code>sudo sysctl -q fs.file-max</code><br>如果返回结果是fs.file-max = 6815744就说明修改成功了。如果不是该数值的话，可能是安装依赖库的问题。</p>
+<li><p><em>加载内核参数：</em><br><code>sudo service procps start</code><br>执行以下语句看看内核参数是否修改成功<br><code>sudo sysctl -q fs.file-max</code><br>如果返回结果是fs.file-max = 6815744就说明修改成功了。如果不是该数值的话，可能是安装依赖库的问题。(最好重启一下计算机)</p>
 </li>
 </ol>
 </li>
@@ -374,7 +618,7 @@ an instanceof Cat:             false
 </li>
 </ol>
 <h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><ol>
-<li>安装完成后，oracle-xe服务是默认启动的，并且会开机自启，可以通过sysv-rc-conf这个软件来设置。（建议关机前手动关掉oracle-xe服务，不然关机会很慢）<br><code>sudo service oracle-xe start</code><br>卸载<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get remove --purge  oracle-xe</div><div class="line">rm /etc/default/oracle-xe</div><div class="line">rm –rf /u01</div></pre></td></tr></table></figure>
+<li>安装完成后，oracle-xe服务是默认启动的，并且会开机自启，可以通过sysv-rc-conf这个软件来设置。（建议关机前手动关掉oracle-xe服务，不然关机会很慢）<br><code>sudo service oracle-xe start</code><br>(启动完毕也重启一下计算机)<br>卸载<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get remove --purge  oracle-xe</div><div class="line">rm /etc/default/oracle-xe</div><div class="line">rm –rf /u01</div></pre></td></tr></table></figure>
 </li>
 </ol>
 ]]></content>
@@ -660,14 +904,14 @@ an instanceof Cat:             false
     </entry>
     
     <entry>
-      <title><![CDATA[gallery]]></title>
-      <url>/gallery/index.html</url>
+      <title><![CDATA[links]]></title>
+      <url>/links/index.html</url>
       <content type="html"></content>
     </entry>
     
     <entry>
-      <title><![CDATA[links]]></title>
-      <url>/links/index.html</url>
+      <title><![CDATA[gallery]]></title>
+      <url>/gallery/index.html</url>
       <content type="html"></content>
     </entry>
     
