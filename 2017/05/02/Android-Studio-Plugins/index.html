@@ -10,7 +10,7 @@
     
     <title>
         
-            分类: Ubuntu | 
+            Android Studio Plugins | 
         
         Sarience&#39;s Blog
     </title>
@@ -34,7 +34,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Sarience">
     <meta name="description" content="花开一束宣纸上,蔷薇半窗花成海">
-    <meta name="keywords" content="Sarience&#39;s Blog">
+    <meta name="keywords" content="Sarience&#39;s Blog,Android">
 
     <!-- Favicons -->
     <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
@@ -60,9 +60,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://sarience.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="分类: Ubuntu | Sarience&#39;s Blog">
+    <meta property="og:title" content="Android Studio Plugins | Sarience&#39;s Blog">
     <meta property="og:description" content="花开一束宣纸上,蔷薇半窗花成海">
-    
+    <meta property="og:article:tag" content="Android"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -218,155 +218,281 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
     
-        
-    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
 
-    <!-- Normal Post -->
-    
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
         
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/wpsfont.png">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(https://sarience.github.io/img/pic/zelezny_animated.gif)">
+    
+            <p class="article-headline-p">
+                Android Studio Plugins
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Sarience</strong>
+        <span>5月 02, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0klEQVR42u3a207EMAwFwP7/T8MrEmx7bBfoJpMnBCXNZCWML8fHluvAxsbGxsbGxsbGfiT7iNcPG335/vnzyU9fPf/qvdUzY2NjY6/NvvjT/413frj8sqrv6p0ZGxsbex/2qwBwTj3fIQlm1eurnhkbGxsbuxrAEmR+ZdXfwsbGxsaOtgiCSvWa8jdiY2NjY0+KSuchqnqUJOA9opaGjY2N/Xj2JA34r6//tL+NjY2N/WB2deVjNPfu/DFe2NjY2KuyJyM7vcbtvDFQHe7ExsbG3oc9KdCXSzzjUlR+3djY2Ng7sJMGQH6InF0NZudXdhHksLGxsRdlJyEh/6c/DyeTVKdXisLGxsZem10dkUlCTh7kcnZyHmxsbOw92fkLek2CSTLTu6xCfxsbGxv7zdmT8JAD8gSjOu5ZaAZjY2Njb8DupQQTZLVsVG0qYGNjY+/GrrZRc0y5ANRqPF/8FjY2NvbS7OQFvVJO0lSYFJuSEIiNjY29A7uaZswLPb3hm7zxMMrAsLGxsd+QPRnTScJetQg1AWNjY2Pvye61V6s7nF9WzuulQ9jY2Nj7sPO2a15C6l10NVA1uyLY2NjYb86eDMdUE5U8pCUfw2j4EhsbG3tpdjXwzEd5JkWlwm7Y2NjYS7Pn6Uf1OnqjOcnHU0hFsLGxsZdg39WyvbcIlYcubGxsbOy8iVtNSObpRzWAXZwNGxsbewN2NXT1jlVt0CbJT5TqYGNjY2/A7pVves/0nu+1frGxsbHXZk/Cxu8ddJK6FLoi2NjY2Euwj3jl7eG85ZBcUy+NieI2NjY29kLsvAWbMCZDNnlqcUMAw8bGxl6OnQ+m56Gld2XVFRXIsLGxsbFbLdtqStNr5UZnxsbGxsZOCjfF3Xo7NNMhbGxs7A3YdxWVJq3i6lvy3bCxsbHXZlcLN9WBy/nF5e1nbGxs7N3Y+yxsbGxsbGxsbGzsx6xPBrT8l9nfHQEAAAAASUVORK5CYII=">
+        </ul>
     
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/28/WPS-for-Linux（ubuntu）字体配置-字体缺失解决办法/">WPS for Linux（ubuntu）字体配置(字体缺失解决办法)</a></p>
-    </div>
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Android/">Android</a>
+    </ul>
+    
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            启动WPS for Linux后，出现提示”系统缺失字体” 。
-出现提示的原因是因为WPS for Linux没有自带windows的...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/28/WPS-for-Linux（ubuntu）字体配置-字体缺失解决办法/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 28, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/Ubuntu/">Ubuntu</a>
-            </span>
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/05/02/Android-Studio-Plugins/" class="leancloud-views_num" data-flag-title="Android Studio Plugins">
+     &nbsp;浏览量
+</span>
 
-            
+            </li>
+        </a>
+    
 
-            
+    
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Android Studio Plugins&url=https://sarience.github.io//2017/05/02/Android-Studio-Plugins/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Android Studio Plugins&url=https://sarience.github.io//2017/05/02/Android-Studio-Plugins/index.html&via=Sarience" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://sarience.github.io//2017/05/02/Android-Studio-Plugins/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://sarience.github.io//2017/05/02/Android-Studio-Plugins/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
 </div>
 
-            
-            
-        
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+        <ol>
+<li><p>ButterKnife Zelezny<br>ButterKnife 注解生成器，使用起来非常简单方便<br><img src="https://sarience.github.io/img/pic/zelezny_animated.gif" alt=""></p>
+</li>
+<li><p>GsonFormat<br>根据api接口生成相应的实体类<br><img src="https://sarience.github.io/img/pic/gson_format.gif" alt=""></p>
+</li>
+<li><p>Android Parcelable Code Generator<br>Android中的序列化有两种方式，分别是实现Serializable接口和Parcelable接口，但在Android中是推荐使用Parcelable<br><img src="https://sarience.github.io/img/pic/parcelable_generator.png" alt=""></p>
+</li>
+<li><p>Android Postfix Completion<br>可根据后缀快速完成代码，这个属于拓展吧，系统已经有这些功能，如sout、notnull等，这个插件在原有的基础上增添了一些新的功能<br><img src="https://sarience.github.io/img/pic/Postfix.gif" alt=""></p>
+</li>
+<li><p>Lifecycle Sorter<br>可以根据Activity或者fragment的生命周期对其生命周期方法位置进行先后排序，快捷键Ctrl + alt + K<br><img src="https://sarience.github.io/img/pic/Lifecycle.gif" alt=""></p>
+</li>
+</ol>
+
     
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/simpleScRecoder.png">
+
     
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/25/如何使用SimpleScreenRecorder进行Ubuntu屏幕录制/">如何使用SimpleScreenRecorder进行Ubuntu屏幕录制</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            今天突然发现自己需要录制视频，而Ubuntu没有像Kali一样自带录频软件，所以有了这篇笔记
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/25/如何使用SimpleScreenRecorder进行Ubuntu屏幕录制/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 25, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/Ubuntu/">Ubuntu</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
 </div>
 
-            
-            
-        
-    
 
-    
+                
 
-    
-        <script>
-    var randomNum;
+                <!-- Post Comments -->
+                
+                    
 
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
 
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
 
-        locatePost = locatePost.next();
-    }
+
+    <!-- 使用 DISQUS -->
+    <div id="disqus-comment">
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://sarience.github.io/2017/05/02/Android-Studio-Plugins/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://sarience.github.io/2017/05/02/Android-Studio-Plugins/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//sarience-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
 </script>
 
+    </div>
+    <style>
+        #disqus-comment{
+            background-color: #eee;
+            padding: 2pc;
+        }
+    </style>
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
     
-</div>
+        <a href="/2017/05/01/oracle数据库导入与导出/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/05/02/Java中Collection与Map详解/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     

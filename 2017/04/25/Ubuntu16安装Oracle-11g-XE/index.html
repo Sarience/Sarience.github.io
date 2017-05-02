@@ -244,7 +244,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装包下载与转换"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装包下载与转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装、配置端口等"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装、配置端口等</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置环境变量"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">配置环境变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#启动服务"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">启动服务</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装包下载与转换"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装包下载与转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装、配置端口等"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装、配置端口等</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置环境变量"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">配置环境变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#启动服务"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">启动服务</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#检查端口监听"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">检查端口监听</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -446,9 +446,10 @@
 </li>
 </ol>
 <h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><ol>
-<li>安装完成后，oracle-xe服务是默认启动的，并且会开机自启，可以通过sysv-rc-conf这个软件来设置。（建议关机前手动关掉oracle-xe服务，不然关机会很慢）<br><code>sudo service oracle-xe start</code><br>(启动完毕也重启一下计算机)<br>卸载<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get remove --purge  oracle-xe</div><div class="line">rm /etc/default/oracle-xe</div><div class="line">rm –rf /u01</div></pre></td></tr></table></figure>
-</li>
+<li>安装完成后，oracle-xe服务是默认启动的，并且会开机自启，可以通过sysv-rc-conf这个软件来设置。（建议关机前手动关掉oracle-xe服务，不然关机会很慢）<br><code>sudo service oracle-xe start</code><br>(启动完毕也重启一下计算机)</li>
 </ol>
+<h4 id="检查端口监听"><a href="#检查端口监听" class="headerlink" title="检查端口监听"></a>检查端口监听</h4><p><img src="https://sarience.github.io/img/pic/oracle_check.png" alt=""></p>
+<p>卸载<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get remove --purge  oracle-xe</div><div class="line">rm /etc/default/oracle-xe</div><div class="line">rm –rf /u01</div></pre></td></tr></table></figure></p>
 
     
 
@@ -608,7 +609,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">13</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">13</span></a>
             </ul>
         </li>
         
