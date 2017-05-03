@@ -10,7 +10,7 @@
     
     <title>
         
-            归档: 2017 | 
+            Java数组补缺 | 
         
         Sarience&#39;s Blog
     </title>
@@ -34,7 +34,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Sarience">
     <meta name="description" content="花开一束宣纸上,蔷薇半窗花成海">
-    <meta name="keywords" content="Sarience&#39;s Blog">
+    <meta name="keywords" content="Sarience&#39;s Blog,CoreJava">
 
     <!-- Favicons -->
     <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
@@ -60,9 +60,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://sarience.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="归档: 2017 | Sarience&#39;s Blog">
+    <meta property="og:title" content="Java数组补缺 | Sarience&#39;s Blog">
     <meta property="og:description" content="花开一束宣纸上,蔷薇半窗花成海">
-    
+    <meta property="og:article:tag" content="CoreJava"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -218,566 +218,290 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
     
-        
-    
-
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/order.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/25/Java中子父类静态代码块，代码块，构造方法的执行顺序/">Java中子父类静态代码块，代码块，构造方法的执行顺序</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            我们来看一段代码和执行结果：
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/25/Java中子父类静态代码块，代码块，构造方法的执行顺序/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 25, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/CoreJava/">CoreJava</a>
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
             </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
+        </a>
     </div>
-</div>
+    -->
 
-            
-            
-        
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数组的静态初始化与动态初始化"><span class="post-toc-number">1.</span> <span class="post-toc-text">数组的静态初始化与动态初始化</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/codingToO.png">
-    
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/25/java面向对象编程的特征-查漏补缺/">java面向对象编程的特征(查漏补缺)</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            封装
-信...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/25/java面向对象编程的特征-查漏补缺/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 25, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/CoreJava/">CoreJava</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/vimshare.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/25/Ubuntu中vim显示行号以及解决上下左右是ABCD的问题/">Ubuntu中vim显示行号以及解决上下左右是ABCD的问题</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            一开始使用vim进行文本编辑的时候，发现上下左右没有进行光标移动，而是变成了ABCD输入了，原始的vi进行光标的移动是用字母键的，而新的vim作为v...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/25/Ubuntu中vim显示行号以及解决上下左右是ABCD的问题/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 25, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/vim/">vim</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/oracle.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/25/Ubuntu16安装Oracle-11g-XE/">Ubuntu16安装Oracle 11g XE</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            在学习JavaEE过程中需要用到数据库，而老师用的是Windows下的oracle XE，我用的是Ubuntu，又不想装虚拟机，所以便到oracle...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/25/Ubuntu16安装Oracle-11g-XE/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 25, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/oracle/">oracle</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/javaCompileARunsrc.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/24/java含包名类的编译与执行/">java含包名类的编译与执行</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            如图，day3下有两个文件夹，一个bin，用来存放编译后的.class文件，一个src用来存放java文件
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/24/java含包名类的编译与执行/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 24, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/CoreJava/">CoreJava</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/hexoConstruct.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/24/如何载Ubuntu下搭建Hexo博客/">如何载Ubuntu下搭建Hexo博客</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-安装Git
-
-sudo apt-get install git
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/24/如何载Ubuntu下搭建Hexo博客/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 24, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/Hexo/">Hexo</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/python3install.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/24/在Ubuntu-16中安装python3-6/">在Ubuntu 16中安装python3.6</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            注意:前提Ubuntu里已经安装了python，不管版本
-
-下载python3.6.1
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/24/在Ubuntu-16中安装python3-6/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 24, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/Python/">Python</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io/img/pic/swapcreate.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/24/如何在Ubuntu中创建swap分区文件并挂载/">如何在Ubuntu中创建swap分区文件并挂载</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            通常，Linux系统中swap分区可以通过两种方式指定，分别为：一、在磁盘分区的时候格式化一个swap分区；二、在文件系统中创建一个...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/24/如何在Ubuntu中创建swap分区文件并挂载/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 24, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/CoreJava/">CoreJava</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="https://sarience.github.io//img/pic/parampass1.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/04/24/Java参数传递与修饰符访问权限/">Java参数传递与修饰符访问权限</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            终于想通了困扰我的String类型传递不修改值的问题了，先说说参数传递吧。
-如下代码：
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/04/24/Java参数传递与修饰符访问权限/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Sarience's avatar">
-            </div>
-            <div>
-                <strong>Sarience</strong>
-                <span>4月 24, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/CoreJava/">CoreJava</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-    <!-- Index nav -->
-        <nav class="material-nav mdl-cell mdl-cell--12-col">
-            <a class="extend prev" rel="prev" href="/archives/2017/"><button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"><i class="material-icons" role="presentation">arrow_back</i></button></a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span>
-        </nav>
-    
-
-    
-        <script>
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                Java数组补缺
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Sarience</strong>
+        <span>5月 03, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC30lEQVR42u3aSW7DMAwF0Nz/0u02QBv7k8zgSM+rInEkPS1KcLj9bPncsLGxsbGxsbGxsS/JvsXP/fvJb493+edYwTq9M2NjY2PvwD751x9Q89WSNyffPnoHGxsbewd2HrT+vv/ok+NjJaHu0Tv5mbGxsbGxjzdOUo7qyr2rx8bGxsaubnm8TrXwVF0TGxsbG3tUoCkWj6pJRX7Fb6qlYWNjY1+ePWn0furvD/e3sbGxsS/Dnj+9BKN3oaNzYmNjYy/KzluteXirBp6kbTxp+mJjY2PvwK42d/NwVW3o9hoSyamwsbGx12bPD129iF6ToFBCel1XBBsbG/uS7MnA5XHZaF4YmgwJYWNjY+/DPvlBK1XorV9FFj7BxsbGXpQ9CTwnRZxqqhC0ByZnxsbGxt6T3WsM5A3debs3L2lhY2Njr8pOwkOSJFTL+nkoygc0myM72NjY2EuwkzbqZPvkCnrt20LhCRsbG3sbdp5gJIlKL+WoUpupCDY2NvYS7N74S1JCypOKSUkrSaKwsbGx12bnAawakJKj5AM3easAGxsbe2f2pNg0aQ/3GgzJRWNjY2PvwJ4fsRrMJo3h/HKbGRg2Njb2F7J7G1eDVm9Yp1psOgnJ2NjY2Iuy8yUmhZ5nJRW9pAgbGxt7bXZSmq+mHPmxeqvlozzY2NjYO7Pz7ZOQUx3NqbZ1o4vAxsbGXpqdpxPVslE1jEXDN8USFTY2NvYO7GqAmRShJm/mIRMbGxt7Z3avoJOkKM9KYHoDQ9jY2NirsqvPpMTTa+gmbeYoRcHGxsZelF0dgnnPgGaybzkoYmNjYy/NzhOD3jDl5CqTZsCTi0rY2NjYX8ueHKuazOTXkQe5k+vAxsbGxk4KN0FZv9o8qA4GYWNjY2PPhyNPUoJqg7YIxsbGxt6Z3RugSQJJ9ZPJSV5SS8PGxsa+PHve6K0mD70Qlbd7sbGxsfdh7/NgY2NjY2NjY2NjX+b5BSeYC20oZgLCAAAAAElFTkSuQmCC">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/CoreJava/">CoreJava</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/05/03/Java数组补缺/" class="leancloud-views_num" data-flag-title="Java数组补缺">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Java数组补缺&url=https://sarience.github.io//2017/05/03/Java数组补缺/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Java数组补缺&url=https://sarience.github.io//2017/05/03/Java数组补缺/index.html&via=Sarience" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://sarience.github.io//2017/05/03/Java数组补缺/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://sarience.github.io//2017/05/03/Java数组补缺/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>此文只是个人的查漏补缺，不会很全面地去解析，所以想要系统学习的童鞋请移步疯狂java讲义一书或其他博客吧，就酱&lt;(￣︶￣)&gt;～</p>
+<h4 id="数组的静态初始化与动态初始化"><a href="#数组的静态初始化与动态初始化" class="headerlink" title="数组的静态初始化与动态初始化"></a>数组的静态初始化与动态初始化</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//静态初始化</span></div><div class="line">String[] s1 = <span class="keyword">new</span> String[]&#123;<span class="string">"you"</span>, <span class="string">"can"</span>, <span class="string">"see"</span>&#125;;</div><div class="line"><span class="comment">//静态初始化</span></div><div class="line">String[] s2 = &#123;<span class="string">"as"</span>, <span class="string">"i"</span>, <span class="string">"said"</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">//动态初始化</span></div><div class="line">String[] s3 = <span class="keyword">new</span> String[<span class="number">5</span>];</div></pre></td></tr></table></figure>
+<ol>
+<li><p>数组元素初始化的值<br>如下图啦：<br><img src="http://sarience.github.io/img/pic/ArrayInitial_val.png" alt=""><br>Tips:不能同时使用动态初始化和静态初始化，反正你用了编译器也不会让你通过╮（￣▽￣）╭<br><img src="http://sarience.github.io/img/pic/ArrayInitial.png" alt=""></p>
+</li>
+<li><p>数组一定得初始化吗？<br>不一定，当数组变量指向一个已经存在的数组就可以啦(本质是引用变量不需要初始化，而对象本身才需要初始化)</p>
+</li>
+<li><p>变量在栈中，对象在堆中<br>一般来说，所有的局部变量都是放在栈中保存的，包括基本类型的变量和引用类型的变量，都存储在各自的方法栈区中；引用类型的变量所引用的对象则总是在堆中。</p>
+</li>
+<li><p>数组每个元素都应当做引用类型的变量<br>Java中多维数组本质是一维数组每个元素都指向另一个一维数组，依次递归下去。</p>
+</li>
+</ol>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+    <!-- 使用 DISQUS -->
+    <div id="disqus-comment">
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://sarience.github.io/2017/05/03/Java数组补缺/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://sarience.github.io/2017/05/03/Java数组补缺/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//sarience-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+    </div>
+    <style>
+        #disqus-comment{
+            background-color: #eee;
+            padding: 2pc;
+        }
+    </style>
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/05/02/Java中Collection与Map详解/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/05/03/Java实例变量与类变量/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     

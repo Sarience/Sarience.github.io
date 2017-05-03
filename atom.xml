@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sarience.github.io/"/>
-  <updated>2017-05-02T12:15:28.951Z</updated>
+  <updated>2017-05-03T09:05:22.341Z</updated>
   <id>https://sarience.github.io/</id>
   
   <author>
@@ -14,6 +14,104 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java的自动拆箱与装箱</title>
+    <link href="https://sarience.github.io/2017/05/03/Java%E7%9A%84%E8%87%AA%E5%8A%A8%E6%8B%86%E7%AE%B1%E4%B8%8E%E8%A3%85%E7%AE%B1/"/>
+    <id>https://sarience.github.io/2017/05/03/Java的自动拆箱与装箱/</id>
+    <published>2017-05-03T09:05:22.000Z</published>
+    <updated>2017-05-03T09:05:22.341Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java实例变量与类变量</title>
+    <link href="https://sarience.github.io/2017/05/03/Java%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F%E4%B8%8E%E7%B1%BB%E5%8F%98%E9%87%8F/"/>
+    <id>https://sarience.github.io/2017/05/03/Java实例变量与类变量/</id>
+    <published>2017-05-03T08:38:52.000Z</published>
+    <updated>2017-05-03T11:21:30.706Z</updated>
+    
+    <content type="html"><![CDATA[<p>此文只是个人的查漏补缺，不会很全面地去解析，所以想要系统学习的童鞋请移步疯狂java讲义一书或其他博客吧，就酱&lt;(￣︶￣)&gt;～</p>
+<h4 id="实例变量与类变量"><a href="#实例变量与类变量" class="headerlink" title="实例变量与类变量"></a>实例变量与类变量</h4><p>实例变量：在类体内没有用static修饰的成员变量，又称非静态变量。<br>类变量：在类体内用static修饰的成员变量，又称静态变量。</p>
+<ol>
+<li>实例变量初始化时机<br>除了静态方法-&gt;代码块—&gt;构造方法的顺序，对实例变量初始化还有个顺序：赋值语句保持在源代码中的顺序，如下两段代码：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.douya.day9;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by douya on 17-5-3.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FiledInitial</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Exam</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">20</span>;</div><div class="line"></div><div class="line">        &#123;</div><div class="line">            count = <span class="number">30</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Exam</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"count:"</span> + count);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Exam();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>count:30</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.douya.day9;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by douya on 17-5-3.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FiledInitial</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Exam</span> </span>&#123;</div><div class="line">        &#123;</div><div class="line">            count = <span class="number">30</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> count = <span class="number">20</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Exam</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"count:"</span> + count);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Exam();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>count:20</p>
+</blockquote>
+<ol>
+<li>类变量的初始化时机<br>与实例变量一致，遵循源码中的顺序，但是为了更加了解static的机制，我们看看下面这段代码和执行结果：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.douya.day9;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by douya on 17-5-3.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Price</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> <span class="keyword">static</span> Price INSTANCE = <span class="keyword">new</span> Price(<span class="number">2.8</span>);</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">double</span> initPrice = <span class="number">20</span>;</div><div class="line"></div><div class="line">    <span class="keyword">double</span> currentPrice;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Price</span><span class="params">(<span class="keyword">double</span> discount)</span> </span>&#123;</div><div class="line">        currentPrice = initPrice - discount;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticPrice</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        System.out.println(Price.INSTANCE.currentPrice);</div><div class="line"></div><div class="line">        Price price = <span class="keyword">new</span> Price(<span class="number">2.8</span>);</div><div class="line">        System.out.println(price.currentPrice);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>-2.8<br>17.2</p>
+</blockquote>
+<p>这段代码，从表面上看，结果应该输出两个17.2才对，实际输出却是-2.8,17.2<br>让我们来分析一下 代码的执行过程：</p>
+<ol>
+<li>第一次用到Price这个类时，程序对Price进行初始化，初始化分两个阶段：第一个阶段，为类变量分配内存空间；第二阶段，初始化代码顺序和为变量赋值；</li>
+<li>这样就很好理解了，第一阶段的时候，系统为INSTANCE,initPrice两个类变量分配内存空间，此时INSTANCE,initPrice的值默认为null，0；</li>
+<li>接着进入第二阶段，为INSTANCE,initPrice赋值，为INSTANCE赋值时，调用Price(2.8)，创建Price实例，并立即为currentPrice赋值，而此时的initPrice值为0，所以计算出的currentPrice为-2,8。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;此文只是个人的查漏补缺，不会很全面地去解析，所以想要系统学习的童鞋请移步疯狂java讲义一书或其他博客吧，就酱&amp;lt;(￣︶￣)&amp;gt;～&lt;/p&gt;
+&lt;h4 id=&quot;实例变量与类变量&quot;&gt;&lt;a href=&quot;#实例变量与类变量&quot; class=&quot;headerlink&quot; title=
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java数组补缺</title>
+    <link href="https://sarience.github.io/2017/05/03/Java%E6%95%B0%E7%BB%84%E8%A1%A5%E7%BC%BA/"/>
+    <id>https://sarience.github.io/2017/05/03/Java数组补缺/</id>
+    <published>2017-05-03T07:48:12.000Z</published>
+    <updated>2017-05-03T08:29:10.489Z</updated>
+    
+    <content type="html"><![CDATA[<p>此文只是个人的查漏补缺，不会很全面地去解析，所以想要系统学习的童鞋请移步疯狂java讲义一书或其他博客吧，就酱&lt;(￣︶￣)&gt;～</p>
+<h4 id="数组的静态初始化与动态初始化"><a href="#数组的静态初始化与动态初始化" class="headerlink" title="数组的静态初始化与动态初始化"></a>数组的静态初始化与动态初始化</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//静态初始化</span></div><div class="line">String[] s1 = <span class="keyword">new</span> String[]&#123;<span class="string">"you"</span>, <span class="string">"can"</span>, <span class="string">"see"</span>&#125;;</div><div class="line"><span class="comment">//静态初始化</span></div><div class="line">String[] s2 = &#123;<span class="string">"as"</span>, <span class="string">"i"</span>, <span class="string">"said"</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">//动态初始化</span></div><div class="line">String[] s3 = <span class="keyword">new</span> String[<span class="number">5</span>];</div></pre></td></tr></table></figure>
+<ol>
+<li><p>数组元素初始化的值<br>如下图啦：<br><img src="http://sarience.github.io/img/pic/ArrayInitial_val.png" alt=""><br>Tips:不能同时使用动态初始化和静态初始化，反正你用了编译器也不会让你通过╮（￣▽￣）╭<br><img src="http://sarience.github.io/img/pic/ArrayInitial.png" alt=""></p>
+</li>
+<li><p>数组一定得初始化吗？<br>不一定，当数组变量指向一个已经存在的数组就可以啦(本质是引用变量不需要初始化，而对象本身才需要初始化)</p>
+</li>
+<li><p>变量在栈中，对象在堆中<br>一般来说，所有的局部变量都是放在栈中保存的，包括基本类型的变量和引用类型的变量，都存储在各自的方法栈区中；引用类型的变量所引用的对象则总是在堆中。</p>
+</li>
+<li><p>数组每个元素都应当做引用类型的变量<br>Java中多维数组本质是一维数组每个元素都指向另一个一维数组，依次递归下去。</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;此文只是个人的查漏补缺，不会很全面地去解析，所以想要系统学习的童鞋请移步疯狂java讲义一书或其他博客吧，就酱&amp;lt;(￣︶￣)&amp;gt;～&lt;/p&gt;
+&lt;h4 id=&quot;数组的静态初始化与动态初始化&quot;&gt;&lt;a href=&quot;#数组的静态初始化与动态初始化&quot; class=&quot;header
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中Collection与Map详解</title>
@@ -495,7 +593,7 @@ Jack 16
     <link href="https://sarience.github.io/2017/04/25/Java%E4%B8%AD%E5%AD%90%E7%88%B6%E7%B1%BB%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%9D%97%EF%BC%8C%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
     <id>https://sarience.github.io/2017/04/25/Java中子父类静态代码块，代码块，构造方法的执行顺序/</id>
     <published>2017-04-25T12:19:36.000Z</published>
-    <updated>2017-04-25T12:33:40.873Z</updated>
+    <updated>2017-05-03T12:32:24.801Z</updated>
     
     <content type="html"><![CDATA[<p>我们来看一段代码和执行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.douya.Test;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by douya on 17-4-25.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> B();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">        <span class="keyword">static</span> &#123;</div><div class="line">            System.out.println(<span class="string">"static A"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        &#123;</div><div class="line">            System.out.println(<span class="string">"codeBlock A"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"constructor A"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">        <span class="keyword">static</span> &#123;</div><div class="line">            System.out.println(<span class="string">"static B"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        &#123;</div><div class="line">            System.out.println(<span class="string">"codeBlock B"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"constructor B"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>执行结果：</p>
@@ -509,6 +607,18 @@ Jack 16
 <li>静态方法先行</li>
 </ol>
 <p>故而执行顺序为：父类静态方法-&gt;子类静态方法-&gt;父类代码块-&gt;父类构造方法-&gt;子类代码块-&gt;子类构造方法</p>
+<p><img src="https://sarience.github.io/img/pic/variable_super_this.png" alt=""></p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>看如下代码和运行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.douya.day9;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by douya on 17-5-3.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Base</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="keyword">this</span>);</div><div class="line">        <span class="keyword">this</span>.display();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> <span class="keyword">extends</span> <span class="title">Base</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">22</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Derived</span><span class="params">()</span> </span>&#123;</div><div class="line">        i = <span class="number">222</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WhoIsThis</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Derived();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>com.douya.day9.Derived@3fee733d<br>0</p>
+</blockquote>
+<p>如果你熟悉子父类的创建和调用就好办了，在new 子类时，this指向的是子类，调用方法时，子类方法覆盖父类同名方法，父类与子类如果有同名属性，则调用的属性要看调用的主体是谁，是父类那就是父类的属性，是子类就是子类的属性。这里display()调用子类display，i是子类的i，子类i在 此时还未被赋值，故其值为0.</p>
+<h4 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h4><p>相信你一定懂了，那么我们一起来巩固一下吧～<br>下面程序的运行结果是什么呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.douya.day9;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.sun.org.apache.bcel.internal.generic.DDIV;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by douya on 17-5-3.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BBase</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> count = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="keyword">this</span>.count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DDerived</span> <span class="keyword">extends</span> <span class="title">BBase</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> count = <span class="number">20</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="keyword">this</span>.count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseAndDerived</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        BBase bBase = <span class="keyword">new</span> BBase();</div><div class="line">        System.out.println(bBase.count);</div><div class="line">        bBase.display();</div><div class="line"></div><div class="line">        DDerived dDerived = <span class="keyword">new</span> DDerived();</div><div class="line">        System.out.println(dDerived.count);</div><div class="line">        dDerived.display();</div><div class="line"></div><div class="line">        BBase bd = <span class="keyword">new</span> DDerived();</div><div class="line">        System.out.println(bd.count);</div><div class="line">        bd.display();</div><div class="line"></div><div class="line">        BBase b2d = dDerived;</div><div class="line">        System.out.println(b2d.count);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>答案：</p>
+<blockquote>
+<p>2<br>2<br>20<br>20<br>2<br>20</p>
+</blockquote>
+<p>Tips:<br>内存中并不存在所有的父类，只是子类保留了父类的所定义的所有实例变量，拥有父类的数据结构</p>
 ]]></content>
     
     <summary type="html">
