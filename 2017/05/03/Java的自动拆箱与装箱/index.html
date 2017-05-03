@@ -34,7 +34,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Sarience">
     <meta name="description" content="花开一束宣纸上,蔷薇半窗花成海">
-    <meta name="keywords" content="Sarience&#39;s Blog">
+    <meta name="keywords" content="Sarience&#39;s Blog,CoreJava">
 
     <!-- Favicons -->
     <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
@@ -62,7 +62,7 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Java的自动拆箱与装箱 | Sarience&#39;s Blog">
     <meta property="og:description" content="花开一束宣纸上,蔷薇半窗花成海">
-    
+    <meta property="og:article:tag" content="CoreJava"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -333,7 +333,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        
+        <a class="post_tag-link" href="/tags/CoreJava/">CoreJava</a>
     </ul>
     
 
@@ -410,7 +410,10 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        Integer i1 = <span class="number">100</span>;</div><div class="line">        Integer i2 = <span class="number">100</span>;</div><div class="line">        Integer i3 = <span class="number">200</span>;</div><div class="line">        Integer i4 = <span class="number">200</span>;</div><div class="line"></div><div class="line">        System.out.println(i1==i2);  <span class="comment">//true</span></div><div class="line">        System.out.println(i3==i4);  <span class="comment">//false</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码的后面，我们可以看到它们的执行结果是不一样的，为什么，在看看我们上面的说明。<br>1、i1和i2会进行自动装箱，执行了valueOf函数，它们的值在(-128,128]这个范围内，它们会拿到SMALL_VALUES数组里面的同一个对象SMALL_VALUES[228]，它们引用到了同一个Integer对象，所以它们肯定是相等的。</p>
+<p>2、i3和i4也会进行自动装箱，执行了valueOf函数，它们的值大于128，所以会执行new Integer(200)，也就是说它们会分别创建两个不同的对象，所以它们肯定不等。</p>
+
     
 
     

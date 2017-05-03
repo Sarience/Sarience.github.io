@@ -5,8 +5,23 @@
     <entry>
       <title><![CDATA[Java的自动拆箱与装箱]]></title>
       <url>/2017/05/03/Java%E7%9A%84%E8%87%AA%E5%8A%A8%E6%8B%86%E7%AE%B1%E4%B8%8E%E8%A3%85%E7%AE%B1/</url>
-      <content type="html"></content>
+      <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        Integer i1 = <span class="number">100</span>;</div><div class="line">        Integer i2 = <span class="number">100</span>;</div><div class="line">        Integer i3 = <span class="number">200</span>;</div><div class="line">        Integer i4 = <span class="number">200</span>;</div><div class="line"></div><div class="line">        System.out.println(i1==i2);  <span class="comment">//true</span></div><div class="line">        System.out.println(i3==i4);  <span class="comment">//false</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码的后面，我们可以看到它们的执行结果是不一样的，为什么，在看看我们上面的说明。<br>1、i1和i2会进行自动装箱，执行了valueOf函数，它们的值在(-128,128]这个范围内，它们会拿到SMALL_VALUES数组里面的同一个对象SMALL_VALUES[228]，它们引用到了同一个Integer对象，所以它们肯定是相等的。</p>
+<p>2、i3和i4也会进行自动装箱，执行了valueOf函数，它们的值大于128，所以会执行new Integer(200)，也就是说它们会分别创建两个不同的对象，所以它们肯定不等。</p>
+]]></content>
       
+        <categories>
+            
+            <category> CoreJava </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> CoreJava </tag>
+            
+        </tags>
         
     </entry>
     
@@ -1177,18 +1192,6 @@ an instanceof Cat:             false
   
     
     <entry>
-      <title><![CDATA[links]]></title>
-      <url>/links/index.html</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[tags]]></title>
-      <url>/tags/index.html</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about/index.html</url>
       <content type="html"><![CDATA[<p>小寒赏梅，出门见山茶，窗台开水仙；大寒深山有瑞香，厅前兰花友，煎山矾三钱，茶饮暖心；立春一簇迎春黄，一路春好处，转眼樱桃红，望春一树粉紫紫；雨水湿菜花，换上棉布裙，深巷杏花闹，看村外李花笑枝头；惊蛰一声，桃花开成诗，棣棠忘忧，铺上宣纸，画蔷薇半窗花成海；春分时节，于一枝海棠上，捉住“小蕾深藏数点红”，篱落边梨花白，木兰本素艳，风吹腻粉开；清明春深处，桐花落，麦花写信，柳花读；待到谷雨，牡丹花前绘满月，荼蘼一开，楝花蔌蔌落清香，何尝不是一个女子对岁月最深情的落款。<br><img src="https://sarience.github.io/img/pic/about.png" alt=""></p>
@@ -1198,6 +1201,18 @@ an instanceof Cat:             false
     <entry>
       <title><![CDATA[gallery]]></title>
       <url>/gallery/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[links]]></title>
+      <url>/links/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[tags]]></title>
+      <url>/tags/index.html</url>
       <content type="html"></content>
     </entry>
     
