@@ -473,7 +473,7 @@
     <link href="https://sarience.github.io/2017/05/03/Java%E6%95%B0%E7%BB%84%E8%A1%A5%E7%BC%BA/"/>
     <id>https://sarience.github.io/2017/05/03/Java数组补缺/</id>
     <published>2017-05-03T07:48:12.000Z</published>
-    <updated>2017-05-03T08:29:10.489Z</updated>
+    <updated>2017-05-08T01:22:18.533Z</updated>
     
     <content type="html"><![CDATA[<p>此文只是个人的查漏补缺，不会很全面地去解析，所以想要系统学习的童鞋请移步疯狂java讲义一书或其他博客吧，就酱&lt;(￣︶￣)&gt;～</p>
 <h4 id="数组的静态初始化与动态初始化"><a href="#数组的静态初始化与动态初始化" class="headerlink" title="数组的静态初始化与动态初始化"></a>数组的静态初始化与动态初始化</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//静态初始化</span></div><div class="line">String[] s1 = <span class="keyword">new</span> String[]&#123;<span class="string">"you"</span>, <span class="string">"can"</span>, <span class="string">"see"</span>&#125;;</div><div class="line"><span class="comment">//静态初始化</span></div><div class="line">String[] s2 = &#123;<span class="string">"as"</span>, <span class="string">"i"</span>, <span class="string">"said"</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">//动态初始化</span></div><div class="line">String[] s3 = <span class="keyword">new</span> String[<span class="number">5</span>];</div></pre></td></tr></table></figure>
