@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sarience.github.io/"/>
-  <updated>2017-05-04T12:25:52.588Z</updated>
+  <updated>2017-05-20T08:16:15.633Z</updated>
   <id>https://sarience.github.io/</id>
   
   <author>
@@ -14,6 +14,158 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式之建造者模式</title>
+    <link href="https://sarience.github.io/2017/05/20/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://sarience.github.io/2017/05/20/设计模式之建造者模式/</id>
+    <published>2017-05-20T06:11:00.000Z</published>
+    <updated>2017-05-20T08:16:15.633Z</updated>
+    
+    <content type="html"><![CDATA[<p>工厂类模式提供的是创建单个类的模式，而建造者模式则是将各种产品集中起来进行管理，用来创建复合对象，所谓复合对<br>象就是指某个类具有不同的属性。建造者模式主要用于“分步骤构建一个复杂的对象”，在这其中“分步骤”是一个稳定的算法，<br>而复杂对象的各个部分则经常变化。因此， 建造者模式主要用来解决“对象部分”的需求变化。 这样可以对对象构造的过程进<br>行更加精细的控制。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line">例子:</div><div class="line">	<span class="comment">//CPU接口</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CPU</span> </span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="comment">//Intel的cup</span></div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">IntelCPU</span> <span class="keyword">implements</span> <span class="title">CPU</span></span>&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//AMD的cpu</span></div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">AMDCPU</span> <span class="keyword">implements</span> <span class="title">CPU</span></span>&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//内存接口</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Memory</span> </span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="comment">//金士顿内存</span></div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">KingstonMemory</span> <span class="keyword">implements</span> <span class="title">Memory</span></span>&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//三星内存</span></div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">SamsungMemory</span> <span class="keyword">implements</span> <span class="title">Memory</span></span>&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//主板内存</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Mainboard</span> </span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="comment">//华硕主板</span></div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">AsusMainboard</span> <span class="keyword">implements</span> <span class="title">Mainboard</span></span>&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//技嘉主板</span></div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">GaMainboard</span> <span class="keyword">implements</span> <span class="title">Mainboard</span></span>&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//计算机</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Computer</span> </span>&#123;</div><div class="line">	    <span class="keyword">private</span> CPU cpu;  </div><div class="line">	    <span class="keyword">private</span> Memory memory;  </div><div class="line">	    <span class="keyword">private</span> Mainboard mainboard;</div><div class="line">	    get/set</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//计算机的builder的接口</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ComputerBuilder</span> </span>&#123;  </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildCPU</span><span class="params">()</span></span>;    </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildMemory</span><span class="params">()</span></span>;    </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildMainboard</span><span class="params">()</span></span>;    </div><div class="line">	    <span class="function"><span class="keyword">public</span> Computer <span class="title">getComputer</span><span class="params">()</span></span>;   </div><div class="line">	&#125;  </div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">//联想电脑的builder</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LenoveComputerBuilder</span> <span class="keyword">implements</span> <span class="title">ComputerBuilder</span> </span>&#123;  </div><div class="line">	   <span class="keyword">private</span> Computer lenoveComputer;    </div><div class="line">	   <span class="function"><span class="keyword">public</span> <span class="title">LenoveComputerBuilder</span><span class="params">()</span></span>&#123;    </div><div class="line">	       lenoveComputer = <span class="keyword">new</span> Computer();    </div><div class="line">	   &#125;    </div><div class="line">	   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildCPU</span><span class="params">()</span> </span>&#123;  </div><div class="line">	       lenoveComputer.setCpu(<span class="keyword">new</span> IntelCPU());  </div><div class="line">	   &#125;  </div><div class="line">	   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildMemory</span><span class="params">()</span> </span>&#123;  </div><div class="line">	       lenoveComputer.setMemory(<span class="keyword">new</span> KingstonMemory());  </div><div class="line">	   &#125;  </div><div class="line">	   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildMainboard</span><span class="params">()</span> </span>&#123;  </div><div class="line">	       lenoveComputer.setMainboard(<span class="keyword">new</span> AsusMainboard());  </div><div class="line">	   &#125;  </div><div class="line">	   <span class="function"><span class="keyword">public</span> Computer <span class="title">getComputer</span><span class="params">()</span> </span>&#123;  </div><div class="line">	       <span class="keyword">return</span> lenoveComputer;  </div><div class="line">	   &#125;  </div><div class="line">	&#125;  </div><div class="line"></div><div class="line">	<span class="comment">//惠普电脑的builder</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HPComputerBuilder</span> <span class="keyword">implements</span> <span class="title">ComputerBuilder</span> </span>&#123;  </div><div class="line">	   <span class="keyword">private</span> Computer HPComputer;    </div><div class="line">	   </div><div class="line">	   <span class="function"><span class="keyword">public</span> <span class="title">HPComputerBuilder</span><span class="params">()</span></span>&#123;  </div><div class="line">	       HPComputer = <span class="keyword">new</span> Computer();  </div><div class="line">	   &#125;  </div><div class="line">	   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildCPU</span><span class="params">()</span> </span>&#123;  </div><div class="line">	       HPComputer.setCpu(<span class="keyword">new</span> AMDCPU());  </div><div class="line">	   &#125;  </div><div class="line">	   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildMemory</span><span class="params">()</span> </span>&#123;  </div><div class="line">	       HPComputer.setMemory(<span class="keyword">new</span> SamsungMemory());  </div><div class="line">	   &#125;  </div><div class="line">	   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildMainboard</span><span class="params">()</span> </span>&#123;  </div><div class="line">	       HPComputer.setMainboard(<span class="keyword">new</span> GaMainboard());  </div><div class="line">	   &#125;  </div><div class="line">	   <span class="function"><span class="keyword">public</span> Computer <span class="title">getComputer</span><span class="params">()</span> </span>&#123;  </div><div class="line">	       <span class="keyword">return</span> HPComputer;  </div><div class="line">	   &#125;  </div><div class="line">	&#125; </div><div class="line"></div><div class="line">	<span class="comment">//Director类(导演)</span></div><div class="line">	<span class="comment">//指导如何具体的创造电脑</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Director</span> </span>&#123;</div><div class="line">	    <span class="keyword">private</span> ComputerBuilder builder;     </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="title">Director</span><span class="params">(ComputerBuilder builder)</span> </span>&#123;     </div><div class="line">	        <span class="keyword">this</span>.builder = builder;     </div><div class="line">	    &#125;    </div><div class="line">	    <span class="comment">//用户自定义的自造顺序 具体指导各种builder如何创建电脑</span></div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">construct</span><span class="params">()</span> </span>&#123;</div><div class="line">	    	</div><div class="line">	    	builder.buildCPU();</div><div class="line">	    	builder.buildMemory();</div><div class="line">	    	builder.buildMainboard();</div><div class="line">	    &#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//测试类</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Computer lenoveComputer = <span class="keyword">null</span>;    </div><div class="line">        		ComputerBuilder lenoveComputerBuilder = <span class="keyword">new</span> LenoveComputerBuilder();    </div><div class="line">		Director director = <span class="keyword">new</span> Director(lenoveComputerBuilder);</div><div class="line">		director.construct();</div><div class="line">		lenoveComputer = lenoveComputerBuilder.getComputer();</div><div class="line">		System.out.println(lenoveComputer);</div><div class="line">	    &#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>从这点看出，建造者模式将很多功能集成到一个类里，这个类可以创造出比较复杂的东西。所以与工程模式的区别就是：工厂模式关注的是创建单个产品，而建造者模式则关注创建适合对象的多个部分。因此，是选择工厂模式还是建造者模式，依实际情况而定。</p>
+<p>例如一个Person类是由头、身体、脚三个对象组成，那么我们在建造者模式中就要先分别创造出这三个部分然后再把他们组装成一个Person对象。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;工厂类模式提供的是创建单个类的模式，而建造者模式则是将各种产品集中起来进行管理，用来创建复合对象，所谓复合对&lt;br&gt;象就是指某个类具有不同的属性。建造者模式主要用于“分步骤构建一个复杂的对象”，在这其中“分步骤”是一个稳定的算法，&lt;br&gt;而复杂对象的各个部分则经常变化。因此
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之单例模式</title>
+    <link href="https://sarience.github.io/2017/05/18/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://sarience.github.io/2017/05/18/设计模式之单例模式/</id>
+    <published>2017-05-18T08:27:53.000Z</published>
+    <updated>2017-05-20T05:37:16.458Z</updated>
+    
+    <content type="html"><![CDATA[<p>单例对象（Singleton）是一种常用的设计模式。在Java应用中，单例对象能保证在一个JVM中，该对象只有一个实例存在。这样的模式有几个好处：<br>1、某些类创建比较频繁，对于一些大型的对象，这是一笔很大的系统开销。<br>2、省去了new操作符，降低了系统内存的使用频率，减轻GC压力。<br>3、有些类如交易所的核心交易引擎，控制着交易流程，如果该类可以创建多个的话，系统完全乱了。</p>
+<h4 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h4><p>例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//简单的单例类  饿汉模式</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line"></div><div class="line">		<span class="comment">/* 持有私有静态实例，防止被引用*/</span>  </div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </div><div class="line"></div><div class="line">		<span class="comment">/* 私有构造方法，防止被实例化 */</span>  </div><div class="line">		<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;  </div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		<span class="comment">/* 静态工程方法，返回Singleton实例 */</span>  </div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">		    <span class="keyword">return</span> instance;  </div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>这个类是可以实现单例模式的，但是存在不少问题,比如在类中不管用户是否要使用该类的对象,就先创建好了一个实例放在内存中。</p>
+<h4 id="懒汉模式"><a href="#懒汉模式" class="headerlink" title="懒汉模式"></a>懒汉模式</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//简单的单例类 懒汉模式</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line"></div><div class="line">		<span class="comment">/* 持有私有静态实例，防止被引用，此处赋值为null，目的是实现延迟加载 */</span>  </div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;  </div><div class="line"></div><div class="line">		<span class="comment">/* 私有构造方法，防止被实例化 */</span>  </div><div class="line">		<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;  </div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		<span class="comment">/* 静态工程方法，创建实例 */</span>  </div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">		    <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123; </div><div class="line">		        instance = <span class="keyword">new</span> Singleton();  </div><div class="line">		    &#125;  </div><div class="line">		    <span class="keyword">return</span> instance;  </div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>这个类可以满足基本要求，但是，像这样毫无线程安全保护的类，如果我们把它放入多线程的环境下，肯定就会出现问题了，如何解决？我们首先会想到对getInstance方法加synchronized关键字，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">		<span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </div><div class="line">		    instance = <span class="keyword">new</span> Singleton();  </div><div class="line">		&#125;  </div><div class="line">		<span class="keyword">return</span> instance;  </div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>但是，synchronized作为修饰符在方法上使用,在性能上会有所下降，因为每次调用getInstance()，都要对对象上锁，事实上，只有在第一次创建对象的时候需要加锁，之后就不需要了，所以，这个地方需要改进。我们改成下面这个：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">		<span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </div><div class="line">		    <span class="keyword">synchronized</span> (instance) &#123;  </div><div class="line">		        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </div><div class="line">		            instance = <span class="keyword">new</span> Singleton();  </div><div class="line">		        &#125;  </div><div class="line">		    &#125;  </div><div class="line">		&#125;  </div><div class="line">		<span class="keyword">return</span> instance;  </div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>似乎解决了之前提到的问题，将synchronized关键字加在了方法内部，也就是说当调用的时候是不需要加锁的，只有在instance为null，并创建对象的时候才需要加锁，性能有一定的提升。但是，这样的情况，还是有可能有问题的。<br>    看下面的情况：在Java指令中创建对象和赋值操作是分开进行的，也就是说instance = new Singleton();语句并非是一个原子操作,在 JVM 中这句代码大概做了下面 3 件事情:</p>
+<ol>
+<li><p>给 new的对象 分配内存</p>
+</li>
+<li><p>调用 Singleton 的构造函数来初始化成员变量</p>
+</li>
+<li><p>将引用instance指向分配的内存空间（执行完这步 instance 就为非 null 了）<br> 但是在 JVM 的即时编译器中存在指令重排序的优化。也就是说上面的第二步和第三步的顺序是不能保证的，最终的执行顺序可能是 1-2-3 也可能是 1-3-2。如果是后者，则在 3 执行完毕、2 未执行之前，另外一个线程B抢夺到了CPU的执行权,这时instance已经是非null了（但却没有初始化），所以线程B会直接返回 instance，然后使用，结果就会出现问题了(因为对象还没有初始化)。</p>
+</li>
+</ol>
+<p>还有另外一种解决方案:使用内部类来维护单例的实现，JVM内部的机制能够保证当一个类被加载的时候，这个类的加载过程是线程互斥的(就是加载完毕后别的线程才能使用)。这样当我们第一次调用getInstance的时候，JVM能够帮我们保证instance只被创建一次，并且会保证把赋值给instance的内存初始化完毕，这样我们就不用担心上面的问题。同时该方法也只会在第一次调用的时候使用互斥机制，这样就解决了低性能问题。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">	  </div><div class="line">		<span class="comment">/* 私有构造方法，防止被实例化 */</span>  </div><div class="line">		<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;  </div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		<span class="comment">/* 此处使用一个内部类来维护单例 */</span>  </div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonFactory</span> </span>&#123;  </div><div class="line">		    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		<span class="comment">/* 获取实例 */</span>  </div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">		    <span class="keyword">return</span> SingletonFactory.instance;  </div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		<span class="comment">/* 如果该对象被用于序列化，可以保证对象在序列化前后保持一致 */</span>  </div><div class="line">		<span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> </span>&#123;  </div><div class="line">		    <span class="keyword">return</span> getInstance();  </div><div class="line">		&#125;  </div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>但是如果在构造函数中抛出异常，实例将永远得不到创建，也会出错。所以说，十分完美的东西是没有的，我们只能根据实际情况，选择最适合自己应用场景的实现方法。</p>
+<p>同时，我们还可以使用反射去创建这个类的对象，即使它的构造器是私有的，我们也是可以调用到的。那么这个时候我们就需要再次修改代码去访问别人反射调用构造器。<br>例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在构造器中控制一下，构造器只允许调用一次,之后在调用就抛出异常</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> flag;</div><div class="line">		<span class="comment">/* 私有构造方法，防止被实例化 */</span>  </div><div class="line">		<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;  </div><div class="line">			<span class="keyword">if</span>(!flag)&#123;</div><div class="line">				flag = <span class="keyword">false</span>;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"不能多次创建单例对象"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		<span class="comment">/* 此处使用一个内部类来维护单例 */</span>  </div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonFactory</span> </span>&#123;  </div><div class="line">		    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		<span class="comment">/* 获取实例 */</span>  </div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">		    <span class="keyword">return</span> SingletonFactory.instance;  </div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		<span class="comment">/* 如果该对象被用于序列化，可以保证对象在序列化前后保持一致 */</span>  </div><div class="line">		<span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> </span>&#123;  </div><div class="line">		    <span class="keyword">return</span> getInstance();  </div><div class="line">		&#125;  </div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>反射的问题处理完了之后，这里还有一个问题，就是如果把单例对象进行序列化然后再反序列化,那么内存中就会出现俩个一样的单例对象，只是内存地址不同。这种情况我们可以使用readResolve方法来防止。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span></span>&#123;.....&#125;</div></pre></td></tr></table></figure></p>
+<p>ObjectInputStream 会检查对象的class是否定义了readResolve方法。如果定义了，将由readResolve方法指定返回的对象。返回对象的类型一定要是兼容的，否则会抛出ClassCastException 。<br>例如:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton8</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;  </div><div class="line"></div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">7863921642928237696L</span>;</div><div class="line"></div><div class="line">		<span class="comment">/* 此处使用一个内部类来维护单例 */</span>  </div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonFactory</span> </span>&#123;  </div><div class="line">		    <span class="meta">@SuppressWarnings</span>(<span class="string">"serial"</span>)</div><div class="line">			<span class="keyword">private</span> <span class="keyword">static</span> Singleton8 instance = <span class="keyword">new</span> Singleton8()&#123;&#125;;</div><div class="line">		&#125;  </div><div class="line">		</div><div class="line">		<span class="comment">//测试方式,把单例对象序列化后再反序列化从而获得一个新的对象 就相当于复制了一个单例对象</span></div><div class="line">		<span class="function"><span class="keyword">public</span> Singleton8 <span class="title">copy</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;  </div><div class="line">		        ByteArrayOutputStream os = <span class="keyword">new</span> ByteArrayOutputStream();  </div><div class="line">		        ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(os);  </div><div class="line">		        oos.writeObject(Singleton8.getInstance());  </div><div class="line">		          </div><div class="line">		        InputStream is = <span class="keyword">new</span> ByteArrayInputStream(os.toByteArray());  </div><div class="line">		        ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(is);  </div><div class="line">		        Singleton8 obj = (Singleton8) ois.readObject();  </div><div class="line">		        <span class="keyword">return</span> obj;  </div><div class="line">		&#125; </div><div class="line">		</div><div class="line">		<span class="comment">/* 获取实例 */</span>  </div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton8 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">		    <span class="keyword">return</span> SingletonFactory.instance;  </div><div class="line">		&#125;  </div><div class="line"></div><div class="line">		<span class="comment">/* 如果该对象被用于序列化，可以保证对象在序列化前后保持一致 */</span>  </div><div class="line">		<span class="comment">/* 把这个方法注释前和注释后来运行测试代码观察结果 */</span>  </div><div class="line">		<span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> </span>&#123;  </div><div class="line">		    <span class="keyword">return</span> getInstance();  </div><div class="line">		&#125;  </div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>最后再思考一个问题  :  是否可以使用枚举来实现单例模式?</p>
+<p>使用静态工厂方法或者传统地声明一个public的实例域（并将构造器声明为private），都可以实现单例模式，但是使用反射机制都可以获取不同的实例。</p>
+<p>自从枚举出现以后，单元素枚举就成为了单例的绝佳选择。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Singleton &#123;</div><div class="line">    INSTANCE;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Singleton singleton1 = Singleton.INSTANCE;</div><div class="line">        Singleton singleton2 = Singleton.INSTANCE;</div><div class="line">        System.out.print(singleton1==singleton2);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果是true，说明单元素枚举的单例方案确实可行。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;单例对象（Singleton）是一种常用的设计模式。在Java应用中，单例对象能保证在一个JVM中，该对象只有一个实例存在。这样的模式有几个好处：&lt;br&gt;1、某些类创建比较频繁，对于一些大型的对象，这是一笔很大的系统开销。&lt;br&gt;2、省去了new操作符，降低了系统内存的使用
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之抽象工厂模式</title>
+    <link href="https://sarience.github.io/2017/05/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://sarience.github.io/2017/05/17/设计模式之抽象工厂模式/</id>
+    <published>2017-05-17T06:49:17.000Z</published>
+    <updated>2017-05-18T08:27:09.971Z</updated>
+    
+    <content type="html"><![CDATA[<p>工厂方法模式有一个问题就是，类的创建依赖工厂类，也就是说，如果想要拓展程序，必须对工厂类进行修改，这违背了闭包原则，所以，从设计角度考虑，有一定的问题，如何解决？就用到抽象工厂模式，创建多个工厂类，这样一旦需要增加新的功能，直接增加新的工厂类就可以了，不需要修改之前的代码。（将工厂类抽象出来，以便之后进行添加新的工厂类）</p>
+<p>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"> 	<span class="comment">//发送短信和邮件的接口</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Sender</span> </span>&#123;  </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Send</span><span class="params">()</span></span>;  </div><div class="line">	&#125; </div><div class="line"></div><div class="line">	<span class="comment">//发送邮件的实现类</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MailSender</span> <span class="keyword">implements</span> <span class="title">Sender</span> </span>&#123;  </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Send</span><span class="params">()</span> </span>&#123;  </div><div class="line">	        System.out.println(<span class="string">"发送邮件!"</span>);  </div><div class="line">	    &#125;  </div><div class="line">	&#125;  </div><div class="line">	<span class="comment">//发送短信的实现类</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsSender</span> <span class="keyword">implements</span> <span class="title">Sender</span> </span>&#123;  </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Send</span><span class="params">()</span> </span>&#123;  </div><div class="line">	        System.out.println(<span class="string">"发送短信!"</span>);  </div><div class="line">	    &#125;  </div><div class="line">	&#125;  </div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WX</span> <span class="title">imp</span> <span class="title">Sender</span></span>&#123;</div><div class="line"> 	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">()</span></span>&#123;</div><div class="line">		syso(“微信发送”);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SendWXFactory</span> <span class="keyword">implements</span> <span class="title">Provider</span> </span>&#123;  </div><div class="line">	    <span class="function"><span class="keyword">public</span> Sender <span class="title">produce</span><span class="params">()</span></span>&#123;  </div><div class="line">	        <span class="keyword">return</span> <span class="keyword">new</span> WX();  </div><div class="line">	    &#125;  </div><div class="line">	&#125;  </div><div class="line"></div><div class="line">	<span class="comment">//给工厂类一个接口</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Provider</span> </span>&#123;  </div><div class="line">	    <span class="function"><span class="keyword">public</span> Sender <span class="title">produce</span><span class="params">()</span></span>;  </div><div class="line">	&#125;  </div><div class="line">	<span class="comment">//两个工厂的实现类</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SendMailFactory</span> <span class="keyword">implements</span> <span class="title">Provider</span> </span>&#123;  </div><div class="line">	    <span class="function"><span class="keyword">public</span> Sender <span class="title">produce</span><span class="params">()</span></span>&#123;  </div><div class="line">	        <span class="keyword">return</span> <span class="keyword">new</span> MailSender();  </div><div class="line">	    &#125;  </div><div class="line">	&#125;  </div><div class="line">	</div><div class="line"></div><div class="line">	<span class="comment">//测试类</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">	  </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">	        Provider provider = <span class="keyword">new</span> SendMailFactory();  </div><div class="line">	        Sender sender = provider.produce();  </div><div class="line">	        sender.Send();  </div><div class="line">	    &#125;  </div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>这个模式的好处就是，如果你现在想增加一个功能：发送及时信息，则只需做一个实现类实现Sender接口，同时做一个工厂类，实现Provider接口，就OK了，无需去改动现成的代码。这样做，拓展性较好</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;工厂方法模式有一个问题就是，类的创建依赖工厂类，也就是说，如果想要拓展程序，必须对工厂类进行修改，这违背了闭包原则，所以，从设计角度考虑，有一定的问题，如何解决？就用到抽象工厂模式，创建多个工厂类，这样一旦需要增加新的功能，直接增加新的工厂类就可以了，不需要修改之前的代码。
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之工厂模式</title>
+    <link href="https://sarience.github.io/2017/05/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://sarience.github.io/2017/05/17/设计模式之工厂模式/</id>
+    <published>2017-05-17T06:30:05.000Z</published>
+    <updated>2017-05-17T06:42:44.110Z</updated>
+    
+    <content type="html"><![CDATA[<p>工厂方法模式分为三种：普通工厂模式   多个工厂方法模式   静态工厂方法模式</p>
+<h3 id="普通工厂"><a href="#普通工厂" class="headerlink" title="普通工厂"></a>普通工厂</h3><p>就是建立一个工厂类，对实现了同一接口的产品类进行实例的创建（工厂类根据不同的参数返回不同的对象）<br>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//发送短信和邮件的接口</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Sender</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Send</span><span class="params">()</span></span>;  </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="comment">//发送邮件的实现类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MailSender</span> <span class="keyword">implements</span> <span class="title">Sender</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Send</span><span class="params">()</span> </span>&#123;  </div><div class="line">        System.out.println(<span class="string">"发送邮件!"</span>);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="comment">//发送短信的实现类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsSender</span> <span class="keyword">implements</span> <span class="title">Sender</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Send</span><span class="params">()</span> </span>&#123;  </div><div class="line">        System.out.println(<span class="string">"发送短信!"</span>);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"></div><div class="line"><span class="comment">//创建工厂类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SendFactory</span> </span>&#123;  </div><div class="line">    <span class="comment">//工厂方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Sender <span class="title">produce</span><span class="params">(String type)</span> </span>&#123;  </div><div class="line">        <span class="keyword">if</span> (<span class="string">"mail"</span>.equals(type)) &#123;  </div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> MailSender();  </div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"sms"</span>.equals(type)) &#123;  </div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SmsSender();  </div><div class="line">        &#125; <span class="keyword">else</span> &#123;  </div><div class="line">            System.out.println(<span class="string">"请输入正确的类型!"</span>);  </div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125; 	</div><div class="line"></div><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryTest</span> </span>&#123;  </div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">        SendFactory factory = <span class="keyword">new</span> SendFactory();  </div><div class="line">        Sender sender = factory.produce(<span class="string">"sms"</span>);</div><div class="line">        sender.Send();  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="多个工厂方法模式"><a href="#多个工厂方法模式" class="headerlink" title="多个工厂方法模式"></a>多个工厂方法模式</h3><p>是对普通工厂方法模式的改进，在普通工厂方法模式中，如果传递的字符串出错，则不能正确创建对象，而多个工厂方法模式是提供多个工厂方法，分别创建对象。(顾名思义，就是在工厂类中定义多个方法，每个方法返回一个对象，也可以简单的理解为普通工厂是根据参数返回不同对象，而多个工厂方法是根据方法返回不同对象)</p>
+<p>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//将上面的代码做下修改，改动下SendFactory类就行</span></div><div class="line">	<span class="comment">//这个就不用根据用户传的字符串类创建对象了</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SendFactory</span> </span>&#123;  </div><div class="line">      </div><div class="line">	    <span class="function"><span class="keyword">public</span> Sender <span class="title">produceMail</span><span class="params">()</span></span>&#123;  </div><div class="line">	        <span class="keyword">return</span> <span class="keyword">new</span> MailSender();  </div><div class="line">	    &#125;  </div><div class="line">	      </div><div class="line">	    <span class="function"><span class="keyword">public</span> Sender <span class="title">produceSms</span><span class="params">()</span></span>&#123;  </div><div class="line">	        <span class="keyword">return</span> <span class="keyword">new</span> SmsSender();  </div><div class="line">	    &#125;  </div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//测试类</span></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryTest</span> </span>&#123;  </div><div class="line">	  </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">	        SendFactory factory = <span class="keyword">new</span> SendFactory();  </div><div class="line">	        Sender sender = factory.produceMail();  </div><div class="line">	        sender.Send();  </div><div class="line">	    &#125;  </div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="静态工厂方法模式"><a href="#静态工厂方法模式" class="headerlink" title="静态工厂方法模式"></a>静态工厂方法模式</h3><p>将上面的多个工厂方法模式里的方法置为静态的，不需要创建实例，直接调用即可。(可以看做是多工厂方法模式的升级版，将工厂类方法声明为静态的，那么就不需要创建工厂实例，直接调用方法即可)</p>
+<p>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SendFactory</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Sender <span class="title">produceMail</span><span class="params">()</span></span>&#123;  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MailSender();  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Sender <span class="title">produceSms</span><span class="params">()</span></span>&#123;  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SmsSender();  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"></div><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryTest</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;      </div><div class="line">        Sender sender = SendFactory.produceMail();  </div><div class="line">        sender.Send();  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;工厂方法模式分为三种：普通工厂模式   多个工厂方法模式   静态工厂方法模式&lt;/p&gt;
+&lt;h3 id=&quot;普通工厂&quot;&gt;&lt;a href=&quot;#普通工厂&quot; class=&quot;headerlink&quot; title=&quot;普通工厂&quot;&gt;&lt;/a&gt;普通工厂&lt;/h3&gt;&lt;p&gt;就是建立一个工厂类，对实现了同
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之概述</title>
+    <link href="https://sarience.github.io/2017/05/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A6%82%E8%BF%B0/"/>
+    <id>https://sarience.github.io/2017/05/17/设计模式之概述/</id>
+    <published>2017-05-17T06:18:55.000Z</published>
+    <updated>2017-05-17T06:29:21.173Z</updated>
+    
+    <content type="html"><![CDATA[<p>设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。<br>使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。<br>项目中合理的运用设计模式可以完美的解决很多问题，每种模式在现在中都有相应的原理来与之对应，每一个模式描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案，这也是它能被广泛应用的原因。</p>
+<h3 id="设计模式的分类"><a href="#设计模式的分类" class="headerlink" title="设计模式的分类"></a>设计模式的分类</h3><p><strong>创建型模式</strong>，共五种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。</p>
+<p><strong>结构型模式</strong>，共七种：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。</p>
+<p><strong>行为型模式</strong>，共十一种：策略模式、模板方法模式、观察者模式、迭代器模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。&lt;br&gt;使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是
+    
+    </summary>
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
+    
+    
+      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
+    
+  </entry>
   
   <entry>
     <title>Java线程</title>
@@ -1294,277 +1446,6 @@ an instanceof Cat:             false
     
     
       <category term="vim" scheme="https://sarience.github.io/tags/vim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu16安装Oracle 11g XE</title>
-    <link href="https://sarience.github.io/2017/04/25/Ubuntu16%E5%AE%89%E8%A3%85Oracle-11g-XE/"/>
-    <id>https://sarience.github.io/2017/04/25/Ubuntu16安装Oracle-11g-XE/</id>
-    <published>2017-04-25T02:37:12.000Z</published>
-    <updated>2017-05-02T03:28:26.460Z</updated>
-    
-    <content type="html"><![CDATA[<p>在学习JavaEE过程中需要用到数据库，而老师用的是Windows下的oracle XE，我用的是Ubuntu，又不想装虚拟机，所以便到oracle官网下载了安装包，并参考了一些文章，记录一下安装过程，以此作为以后的参考笔记。</p>
-<p>Tips:<em>什么是Oracle 11g XE呢？</em></p>
-<blockquote>
-<p>Oracle Database Express Edition 是Oracle Database的简装版，只有一个数据库实例XE，因此也叫Oracle Database XE。它拥有正式版的所有功能，只是在内存和数据大小上做了限制。适合初学者用来学习Oracle。</p>
-</blockquote>
-<h3 id="安装包下载与转换"><a href="#安装包下载与转换" class="headerlink" title="安装包下载与转换"></a>安装包下载与转换</h3><ol>
-<li><p>从官网下载Oracle 11g XE安装包（需要创建账户登录后才能下载），下载的文件是oracle-xe-11.2.0-1.0.x86_64.rpm.zip也可以下载我提供的下载好的<a href="http://o7glqnnuw.bkt.clouddn.com/sarience/file/oracle-xe-11.2.0-1.0.x86_64.rpm.zip" target="_blank" rel="external">安装包</a></p>
-</li>
-<li><p>转换deb包（若下载了deb安装包，跳过此步骤：<a href="http://o7glqnnuw.bkt.clouddn.com/sarience/file/oracle-xe_11.2.0-2_amd64.deb" target="_blank" rel="external">deb安装包地址</a>）<br>由于官方只为Linux提供了rpm安装包（适用于CentOS，Redhat，Fedora），所以需要先转化deb包。</p>
-<ol>
-<li><p><em>解压到当前目录</em><br><code>unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip</code></p>
-</li>
-<li><p><em>安装.deb与.rpm包转换工具：alien</em><br><code>sudo apt-get install alien</code></p>
-</li>
-<li><p><em>生成deb包</em><br><code>sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm</code></p>
-</li>
-<li><p><em>安装依赖类库</em><br><code>sudo apt-get install libaio1 unixodbc</code></p>
-</li>
-<li><p><em>创建配置文件</em><br>新建chkconfig文件<br>Oracle XE在Red Hat上安装时需要依赖/sbin chkconfig文件，Ubuntu没该文件安装时会报错。<br><code>sudo gedit /sbin/chkconfig</code><br>把下面内容贴进去</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># Oracle 11gR2 XE installer chkconfig hack for Ubuntu</div><div class="line">file=/etc/init.d/oracle-xe</div><div class="line">if [[ ! `tail -n1 $file | grep INIT` ]]; then</div><div class="line">echo &gt;&gt; $file</div><div class="line">echo &apos;### BEGIN INIT INFO&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Provides: OracleXE&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Required-Start: $remote_fs $syslog&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Required-Stop: $remote_fs $syslog&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Default-Start: 2 3 4 5&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Default-Stop: 0 1 6&apos; &gt;&gt; $file</div><div class="line">echo &apos;# Short-Description: Oracle 11g Express Edition&apos; &gt;&gt; $file</div><div class="line">echo &apos;### END INIT INFO&apos; &gt;&gt; $file</div><div class="line">fi</div><div class="line">update-rc.d oracle-xe defaults 80 01</div></pre></td></tr></table></figure>
-</li>
-<li><p><em>给chkconfig添加执行权限</em><br><code>sudo chmod 755 /sbin/chkconfig</code></p>
-</li>
-<li><p><em>配置内核参数</em><br>新建60-oracle.conf<br><code>sudo gedit /etc/sysctl.d/60-oracle.conf</code><br>输入下面内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Oracle 11g XE kernel parameters</span></div><div class="line">fs.file-max=6815744</div><div class="line">net.ipv4.ip_local_port_range=9000 65000</div><div class="line">kernel.sem=250 32000 100 128</div><div class="line">kernel.shmmax=4163487744</div><div class="line">net.core.rmem_default=262144</div><div class="line">net.core.rmem_max=4194304</div><div class="line">net.core.wmem_default=262144</div><div class="line">net.core.wmem_max=1048576</div><div class="line">fs.aio-max-nr=1048576</div></pre></td></tr></table></figure>
-</li>
-<li><p><em>加载内核参数：</em><br><code>sudo service procps start</code><br>执行以下语句看看内核参数是否修改成功<br><code>sudo sysctl -q fs.file-max</code><br>如果返回结果是fs.file-max = 6815744就说明修改成功了。如果不是该数值的话，可能是安装依赖库的问题。(最好重启一下计算机)</p>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="安装、配置端口等"><a href="#安装、配置端口等" class="headerlink" title="安装、配置端口等"></a>安装、配置端口等</h3><ol>
-<li><p>安装Oracle XE，在deb安装包所在目录的终端下执行下面的命令<br><code>sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb</code></p>
-</li>
-<li><p>配置xe端口、密码等，注意要输入数据库密码。<br><code>sudo /etc/init.d/oracle-xe configure</code></p>
-</li>
-</ol>
-<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><ol>
-<li><p>打开shell配置文件，Ubuntu默认shell是bash，配置文件是.bashrc。<br><code>sudo gedit ～/.bashrc</code></p>
-</li>
-<li><p>将以下内容复制到shell的配置文件中进去，如果原先配置过PATH环境变量的话，将现在的加进去就可以。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe</div><div class="line"><span class="built_in">export</span> ORACLE_SID=XE</div><div class="line"><span class="built_in">export</span> NLS_LANG=<span class="string">"`<span class="variable">$ORACLE_HOME</span>/bin/nls_lang.sh`"</span></div><div class="line"><span class="built_in">export</span> ORACLE_BASE=/u01/app/oracle</div><div class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$ORACLE_HOME</span>/lib:<span class="variable">$LD_LIBRARY_PATH</span></div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$ORACLE_HOME</span>/bin:<span class="variable">$PATH</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><ol>
-<li>安装完成后，oracle-xe服务是默认启动的，并且会开机自启，可以通过sysv-rc-conf这个软件来设置。（建议关机前手动关掉oracle-xe服务，不然关机会很慢）<br><code>sudo service oracle-xe start</code><br>(启动完毕也重启一下计算机)</li>
-</ol>
-<h4 id="检查端口监听"><a href="#检查端口监听" class="headerlink" title="检查端口监听"></a>检查端口监听</h4><p><img src="https://sarience.github.io/img/pic/oracle_check.png" alt=""></p>
-<p>卸载<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get remove --purge  oracle-xe</div><div class="line">rm /etc/default/oracle-xe</div><div class="line">rm –rf /u01</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在学习JavaEE过程中需要用到数据库，而老师用的是Windows下的oracle XE，我用的是Ubuntu，又不想装虚拟机，所以便到oracle官网下载了安装包，并参考了一些文章，记录一下安装过程，以此作为以后的参考笔记。&lt;/p&gt;
-&lt;p&gt;Tips:&lt;em&gt;什么是Orac
-    
-    </summary>
-    
-      <category term="oracle" scheme="https://sarience.github.io/categories/oracle/"/>
-    
-    
-      <category term="oracle" scheme="https://sarience.github.io/tags/oracle/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java含包名类的编译与执行</title>
-    <link href="https://sarience.github.io/2017/04/24/java%E5%90%AB%E5%8C%85%E5%90%8D%E7%B1%BB%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E6%89%A7%E8%A1%8C/"/>
-    <id>https://sarience.github.io/2017/04/24/java含包名类的编译与执行/</id>
-    <published>2017-04-24T08:49:17.000Z</published>
-    <updated>2017-04-24T09:32:19.104Z</updated>
-    
-    <content type="html"><![CDATA[<p>如图，day3下有两个文件夹，一个bin，用来存放编译后的.class文件，一个src用来存放java文件<br><img src="https://sarience.github.io/img/pic/javaCompileARun.png" alt=""><br>在src下面我们写了两个带包名的java类，为Hello.java和World.java,包名均为com.douya.test<br><img src="https://sarience.github.io/img/pic/javaCompileARunsrc.png" alt=""><br>执行<code>javac -d bin src/*.java</code>将编译src下的所有的java文件，并且编译后的.class文件放在bin目录下，并在bin目录下生成相应的包路径<br><img src="https://sarience.github.io/img/pic/javaCompileARunC.png" alt=""><br><img src="https://sarience.github.io/img/pic/javaCompileARunC2.png" alt=""></p>
-<p>依次执行<code>java -cp bin com.douya.test.Hello</code>，<code>java -cp bin com.douya.test.World</code>，参数<code>-cp</code>，全称<code>-classpath</code>指定Classpath路径，这里指定为当前目录下的<code>bin</code>，要执行的类需要<code>包名加类名来访问</code>，结果如下<br><img src="https://sarience.github.io/img/pic/javaCompileARunC3.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;如图，day3下有两个文件夹，一个bin，用来存放编译后的.class文件，一个src用来存放java文件&lt;br&gt;&lt;img src=&quot;https://sarience.github.io/img/pic/javaCompileARun.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;在sr
-    
-    </summary>
-    
-      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
-    
-    
-      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何载Ubuntu下搭建Hexo博客</title>
-    <link href="https://sarience.github.io/2017/04/24/%E5%A6%82%E4%BD%95%E8%BD%BDUbuntu%E4%B8%8B%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/"/>
-    <id>https://sarience.github.io/2017/04/24/如何载Ubuntu下搭建Hexo博客/</id>
-    <published>2017-04-24T08:06:53.000Z</published>
-    <updated>2017-04-24T08:46:38.355Z</updated>
-    
-    <content type="html"><![CDATA[<ol>
-<li><p>安装Git</p>
-<blockquote>
-<p>sudo apt-get install git</p>
-</blockquote>
-</li>
-<li><p>安装NodeJs</p>
-<blockquote>
-<p>wget -qO- <a href="https://raw.github.com/creationix/nvm/master/install.sh" target="_blank" rel="external">https://raw.github.com/creationix/nvm/master/install.sh</a> | sh<br>安装完成后，重启终端<br>nvm install stable</p>
-</blockquote>
-</li>
-<li><p>安装Hexo</p>
-<blockquote>
-<p>npm install -g hexo-cli<br>npm install hexo –save</p>
-</blockquote>
-</li>
-<li><p>初始化Hexo</p>
-<blockquote>
-<p>hexo init</p>
-</blockquote>
-</li>
-<li><p>安装Hexo插件</p>
-<blockquote>
-<p>npm install hexo-generator-index –save<br>npm install hexo-generator-archive –save<br>npm install hexo-generator-category –save<br>npm install hexo-generator-tag –save<br>npm install hexo-server –save<br>npm install hexo-deployer-git –save<br>npm install hexo-deployer-heroku –save<br>npm install hexo-deployer-rsync –save<br>npm install hexo-deployer-openshift –save<br>npm install hexo-renderer-marked@0.2 –save<br>npm install hexo-renderer-stylus@0.2 –save<br>npm install hexo-generator-feed@1 –save<br>npm install hexo-generator-sitemap@1 –save<br>//安装 ejs，否则无法解析模板<br>npm install  </p>
-</blockquote>
-</li>
-<li><p>安装Hexo部署工具</p>
-<blockquote>
-<p>npm install hexo-deployer-git –save</p>
-</blockquote>
-</li>
-<li><p>生成Hexo静态文件</p>
-<blockquote>
-<p>hexo g</p>
-</blockquote>
-</li>
-</ol>
-<ol>
-<li><p>开启Hexo本地服务，验证是否搭建成功</p>
-<blockquote>
-<p>hexo s -p 80<br>意思是在本地80端口开启hexo服务<br>浏览器访问localhost验证</p>
-</blockquote>
-</li>
-<li><p>提交到github</p>
-<ol>
-<li>创建一个名为：yourname.github.io的分支</li>
-<li>修改_config.yml文件，配置deploy的type类型为git，resp为你的分支访问方式(有两种，一种是ssh,使用密钥链接，适用于维护单个博客，方便使用;一种是https，提交需要输入您的github账户和密码，适用于维护多个博客)</li>
-<li>hexo d提交到github</li>
-</ol>
-</li>
-</ol>
-<h3 id="github提交的两种方式"><a href="#github提交的两种方式" class="headerlink" title="github提交的两种方式"></a>github提交的两种方式</h3><ol>
-<li>https<br>提交类型为https，repo填你的repository地址，如图：<br><img src="https://sarience.github.io/img/pic/hexoConstructHTTPS.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: https://github.com/Sarience/Sarience.github.io.git</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>在提交的过程中，会需要你输入你的github账号和密码，账号密码正确后则提交成功</p>
-<ol>
-<li>ssh<br>提交类型为git，repo填你的repository地址，如图：<br><img src="https://sarience.github.io/img/pic/hexoConstructSSH.png" alt=""><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git<span class="meta">@github</span>.com:Sarience/Sarience.github.io.git</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>在执行<code>hexo d</code>之前，先要生成rsa秘钥并且将你的秘钥添加到repository的设置中：</p>
-<pre><code>1. 执行`ssh-keygen -t rsa`，会在你的home目录下生成一个`.ssh`文件夹，其中会有两个秘钥，一个公钥，一个私钥
-2. 执行`cat ~/.ssh/id_rsa.pub`
-3. 将其内容复制并添加到repository中
-</code></pre><p>记得勾选<code>Allow write access</code><br><img src="https://sarience.github.io/img/pic/hexoConstructRSA.png" alt=""></p>
-<pre><code>4. 执行`ssh -T git@github.com`进行测试，看到`Hi [yourGithubAccount]! You&apos;ve successfully authenticated, but GitHub does not provide shell access.`说明秘钥添加成功
-5. 设置用户信息：
-`git config --global user.name &quot;[yourName]&quot;//用户名`
-`git config --global user.email  &quot;[yourEmail]&quot;//填写自己的邮箱`
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;安装Git&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;sudo apt-get install git&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;安装NodeJs&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;wget -qO- &lt;a href
-    
-    </summary>
-    
-      <category term="Hexo" scheme="https://sarience.github.io/categories/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="https://sarience.github.io/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在Ubuntu 16中安装python3.6</title>
-    <link href="https://sarience.github.io/2017/04/24/%E5%9C%A8Ubuntu-16%E4%B8%AD%E5%AE%89%E8%A3%85python3-6/"/>
-    <id>https://sarience.github.io/2017/04/24/在Ubuntu-16中安装python3-6/</id>
-    <published>2017-04-24T07:54:37.000Z</published>
-    <updated>2017-04-24T08:04:55.831Z</updated>
-    
-    <content type="html"><![CDATA[<p>注意:前提Ubuntu里已经安装了python，不管版本</p>
-<ol>
-<li><p>下载python3.6.1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tgz</div><div class="line">tar -xvzf Python-3.6.1.tgz</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装一些依赖包<br>由于等会我会装virtualenv，所以在编译安装前需要装zlib和readline<br>在ubuntu里，zlib叫zlib1g，相应的zlib-devel叫zlib1g.dev</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install readline.dev</div><div class="line">sudo apt-get install zlib1g.dev</div></pre></td></tr></table></figure>
-</li>
-<li><p>编译安装python</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./configure</div><div class="line">sudo make &amp;&amp; sudo  make install</div></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;注意:前提Ubuntu里已经安装了python，不管版本&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;下载python3.6.1&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div cl
-    
-    </summary>
-    
-      <category term="Python" scheme="https://sarience.github.io/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="https://sarience.github.io/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何在Ubuntu中创建swap分区文件并挂载</title>
-    <link href="https://sarience.github.io/2017/04/24/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%AD%E5%88%9B%E5%BB%BAswap%E5%88%86%E5%8C%BA%E6%96%87%E4%BB%B6%E5%B9%B6%E6%8C%82%E8%BD%BD/"/>
-    <id>https://sarience.github.io/2017/04/24/如何在Ubuntu中创建swap分区文件并挂载/</id>
-    <published>2017-04-24T07:44:52.000Z</published>
-    <updated>2017-04-24T08:42:34.468Z</updated>
-    
-    <content type="html"><![CDATA[<p>通常，Linux系统中swap分区可以通过两种方式指定，分别为：<br>一、在磁盘分区的时候格式化一个swap分区；<br>二、在文件系统中创建一个swap文件作为swap分区。<br>此文主要介绍第二种方式。步骤如下：</p>
-<ol>
-<li><p>创建文件<br><code>fallocate -l 8G /swapfile</code><br>说明：8G 表示swap文件大小，/swapfile为swap文件路径和名称，可以任意指定。</p>
-</li>
-<li><p>修改文件权限<br><code>chmod 600 /swapfile</code></p>
-</li>
-<li><p>将 swapfile 初始化为交换文件<br><code>mkswap /swapfile</code></p>
-</li>
-<li><p>启用交换文件<br><code>swapon /swapfile</code></p>
-</li>
-<li><p>至此，linux系统已经将swapfile作为交换文件使用，但是重启之后是不会自动挂在刚才创建的文件的，因此需要手动修改 /etc/fstab 配置文件：<br><code>gedit /etc/fstab</code><br>在文件中添加如下内容：<br><code>/swapfile none swap sw 0 0</code></p>
-</li>
-<li><p>完成，测试下：<br><code>swapon -s</code></p>
-</li>
-</ol>
-<p>提示：<br>        如果需要卸载swap分区文件，可以使用命令：<code>swapoff /swapfile</code></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;通常，Linux系统中swap分区可以通过两种方式指定，分别为：&lt;br&gt;一、在磁盘分区的时候格式化一个swap分区；&lt;br&gt;二、在文件系统中创建一个swap文件作为swap分区。&lt;br&gt;此文主要介绍第二种方式。步骤如下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;创建文件&lt;br&gt;&lt;c
-    
-    </summary>
-    
-      <category term="CoreJava" scheme="https://sarience.github.io/categories/CoreJava/"/>
-    
-    
-      <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
     
   </entry>
   
