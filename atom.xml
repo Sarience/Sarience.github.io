@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sarience.github.io/"/>
-  <updated>2017-05-20T08:16:15.633Z</updated>
+  <updated>2017-07-02T12:20:39.594Z</updated>
   <id>https://sarience.github.io/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rlwrap解决sqlplus上下键和backspace键找历史命令</title>
+    <link href="https://sarience.github.io/2017/07/02/rlwrap%E8%A7%A3%E5%86%B3sqlplus%E4%B8%8A%E4%B8%8B%E9%94%AE%E5%92%8Cbackspace%E9%94%AE%E6%89%BE%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4/"/>
+    <id>https://sarience.github.io/2017/07/02/rlwrap解决sqlplus上下键和backspace键找历史命令/</id>
+    <published>2017-07-02T12:04:34.000Z</published>
+    <updated>2017-07-02T12:20:39.594Z</updated>
+    
+    <content type="html"><![CDATA[<p>在Linux下面使用sqlplus工具的时候默认不能左右移动光标，或者不能使用上下键查找历史命令，使用起来很不方便，影响效率。不过，可以通过第三方工具readline wrap（rlwrap）来解决这个问题。</p>
+<p>一、安装readline<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install readline-common </div><div class="line">sudo apt-get install readline-doc</div></pre></td></tr></table></figure></p>
+<p>如果没有源，可以自己下载相关的安装包</p>
+<p>二:安装rlwrap<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install rlwrap</div></pre></td></tr></table></figure></p>
+<p>三、使用rlwrap<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rlwarap sqlplus username/password</div></pre></td></tr></table></figure></p>
+<p>也可以将rlwrap命令配置到Oracle用户的.bash_profile文件中</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在Linux下面使用sqlplus工具的时候默认不能左右移动光标，或者不能使用上下键查找历史命令，使用起来很不方便，影响效率。不过，可以通过第三方工具readline wrap（rlwrap）来解决这个问题。&lt;/p&gt;
+&lt;p&gt;一、安装readline&lt;br&gt;&lt;figure c
+    
+    </summary>
+    
+      <category term="Oracle" scheme="https://sarience.github.io/categories/Oracle/"/>
+    
+    
+      <category term="Oracle" scheme="https://sarience.github.io/tags/Oracle/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式之建造者模式</title>
@@ -1237,215 +1266,6 @@ an instanceof Cat:             false
     
     
       <category term="CoreJava" scheme="https://sarience.github.io/tags/CoreJava/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu中vim显示行号以及解决上下左右是ABCD的问题</title>
-    <link href="https://sarience.github.io/2017/04/25/Ubuntu%E4%B8%ADvim%E6%98%BE%E7%A4%BA%E8%A1%8C%E5%8F%B7%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E6%98%AFABCD%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>https://sarience.github.io/2017/04/25/Ubuntu中vim显示行号以及解决上下左右是ABCD的问题/</id>
-    <published>2017-04-25T07:18:49.000Z</published>
-    <updated>2017-04-25T08:37:18.284Z</updated>
-    
-    <content type="html"><![CDATA[<p>一开始使用vim进行文本编辑的时候，发现上下左右没有进行光标移动，而是变成了ABCD输入了，原始的vi进行光标的移动是用字母键的，而新的vim作为vi的升级版，更加符合人们的使用习惯。于是乎，我们只需将vi升级成vim便能解决问题。<br><code>sudo apt-get install vim</code></p>
-<p>恩，这个问题解决了，可是行号怎么办？别急，在命令模式下，输入<code>set nu</code>，便可以显示行号了。但是每编辑一个文件都输入一次很麻烦，有没有只配置一次就能解决的方案呢？当然有啦，如下：</p>
-<h2 id="为所有用户设置"><a href="#为所有用户设置" class="headerlink" title="为所有用户设置"></a>为所有用户设置</h2><ol>
-<li><p>进入到vim的安装文件夹<br><code>cd /usr/share/vim</code></p>
-</li>
-<li><p>编辑vimrc文件<br><code>sudo vi vimrc</code></p>
-</li>
-<li>添加你的设置，这里是<code>set nu</code><br><code>set nu  &quot;显示行数</code></li>
-</ol>
-<p><img src="https://sarience.github.io/img/pic/vimshare.png" alt=""></p>
-<h2 id="只为当前用户设置"><a href="#只为当前用户设置" class="headerlink" title="只为当前用户设置"></a>只为当前用户设置</h2><ol>
-<li>进入到当前用户的家目录<br><code>cd  ~</code></li>
-<li>编辑<code>.vimrc</code>文件，如果没有，则创建<br><code>sudo vi vimrc</code></li>
-<li>添加你的设置<br><code>set nu</code></li>
-</ol>
-<p><img src="https://sarience.github.io/img/pic/vimhome.png" alt=""></p>
-<h2 id="更多设置"><a href="#更多设置" class="headerlink" title="更多设置"></a>更多设置</h2><p>当然了，便捷设置不可能只有这一种，以下列出一部分用于参考，各取所需吧</p>
-<table>
-<thead>
-<tr>
-<th>设置</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>set autoindent</td>
-<td>自动缩进</td>
-</tr>
-<tr>
-<td>set smartindent</td>
-<td>智能缩进</td>
-</tr>
-<tr>
-<td>set nu</td>
-<td>“显示行数</td>
-</tr>
-<tr>
-<td>set mouse=a</td>
-<td>“自动换行</td>
-</tr>
-<tr>
-<td>set nocompatible</td>
-<td>关闭 vi 兼容模式</td>
-</tr>
-<tr>
-<td>syntax on</td>
-<td>自动语法高亮</td>
-</tr>
-<tr>
-<td>colorscheme molokai</td>
-<td>设定配色方案</td>
-</tr>
-<tr>
-<td>set number</td>
-<td>显示行号</td>
-</tr>
-<tr>
-<td>set cursorline</td>
-<td>突出显示当前行</td>
-</tr>
-<tr>
-<td>set ruler</td>
-<td>打开状态栏标尺</td>
-</tr>
-<tr>
-<td>set shiftwidth=4</td>
-<td>设定 &lt;&lt; 和 &gt;&gt; 命令移动时的宽度为 4</td>
-</tr>
-<tr>
-<td>set softtabstop=4</td>
-<td>使得按退格键时可以一次删掉 4 个空格</td>
-</tr>
-<tr>
-<td>set tabstop=4</td>
-<td>设定 tab 长度为 4</td>
-</tr>
-<tr>
-<td>set nobackup</td>
-<td>覆盖文件时不备份</td>
-</tr>
-<tr>
-<td>set autochdir</td>
-<td>自动切换当前目录为当前文件所在的目录</td>
-</tr>
-<tr>
-<td>filetype plugin indent on</td>
-<td>开启插件</td>
-</tr>
-<tr>
-<td>set backupcopy=yes</td>
-<td>设置备份时的行为为覆盖</td>
-</tr>
-<tr>
-<td>set ignorecase smartcase</td>
-<td>搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感</td>
-</tr>
-<tr>
-<td>set nowrapscan</td>
-<td>禁止在搜索到文件两端时重新搜索</td>
-</tr>
-<tr>
-<td>set incsearch</td>
-<td>输入搜索内容时就显示搜索结果</td>
-</tr>
-<tr>
-<td>set hlsearch</td>
-<td>搜索时高亮显示被找到的文本</td>
-</tr>
-<tr>
-<td>set noerrorbells</td>
-<td>关闭错误信息响铃</td>
-</tr>
-<tr>
-<td>set novisualbell</td>
-<td>关闭使用可视响铃代替呼叫</td>
-</tr>
-<tr>
-<td>set t_vb=</td>
-<td>置空错误铃声的终端代码</td>
-</tr>
-<tr>
-<td>set showmatch</td>
-<td>插入括号时，短暂地跳转到匹配的对应括号</td>
-</tr>
-<tr>
-<td>set matchtime=2</td>
-<td>短暂跳转到匹配括号的时间</td>
-</tr>
-<tr>
-<td>set magic</td>
-<td>设置魔术</td>
-</tr>
-<tr>
-<td>set hidden</td>
-<td>允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存</td>
-</tr>
-<tr>
-<td>set guioptions-=T</td>
-<td>隐藏工具栏</td>
-</tr>
-<tr>
-<td>set guioptions-=m</td>
-<td>隐藏菜单栏</td>
-</tr>
-<tr>
-<td>set smartindent</td>
-<td>开启新行时使用智能自动缩进</td>
-</tr>
-<tr>
-<td>set backspace=indent,eol,start</td>
-<td>不设定在插入状态无法用退格键和 Delete 键删除回车符</td>
-</tr>
-<tr>
-<td>set cmdheight=1</td>
-<td>设定命令行的行数为 1</td>
-</tr>
-<tr>
-<td>set laststatus=2</td>
-<td>显示状态栏 (默认值为 1, 无法显示状态栏)</td>
-</tr>
-<tr>
-<td>“set statusline=\ %&lt;%F[%1<em>%M%</em>%n%R%H]%=\ %y\ %0(%{&amp;fileformat}\ %{&amp;encoding}\ %c:%l/%L%)\</td>
-<td>设置在状态行显示的信息</td>
-</tr>
-<tr>
-<td>“set foldenable</td>
-<td>开始折叠</td>
-</tr>
-<tr>
-<td>“set foldmethod=syntax</td>
-<td>设置语法折叠</td>
-</tr>
-<tr>
-<td>“set foldcolumn=0</td>
-<td>设置折叠区域的宽度</td>
-</tr>
-<tr>
-<td>“setlocal foldlevel=1</td>
-<td>设置折叠层数为</td>
-</tr>
-<tr>
-<td>“set foldclose=all</td>
-<td>设置为自动关闭折叠</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一开始使用vim进行文本编辑的时候，发现上下左右没有进行光标移动，而是变成了ABCD输入了，原始的vi进行光标的移动是用字母键的，而新的vim作为vi的升级版，更加符合人们的使用习惯。于是乎，我们只需将vi升级成vim便能解决问题。&lt;br&gt;&lt;code&gt;sudo apt-ge
-    
-    </summary>
-    
-      <category term="vim" scheme="https://sarience.github.io/categories/vim/"/>
-    
-    
-      <category term="vim" scheme="https://sarience.github.io/tags/vim/"/>
     
   </entry>
   
