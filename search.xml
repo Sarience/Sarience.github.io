@@ -1736,6 +1736,12 @@ an instanceof Cat:             false
     </entry>
     
     <entry>
+      <title><![CDATA[gallery]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about/index.html</url>
       <content type="html"><![CDATA[<p>小寒赏梅，出门见山茶，窗台开水仙；大寒深山有瑞香，厅前兰花友，煎山矾三钱，茶饮暖心；立春一簇迎春黄，一路春好处，转眼樱桃红，望春一树粉紫紫；雨水湿菜花，换上棉布裙，深巷杏花闹，看村外李花笑枝头；惊蛰一声，桃花开成诗，棣棠忘忧，铺上宣纸，画蔷薇半窗花成海；春分时节，于一枝海棠上，捉住“小蕾深藏数点红”，篱落边梨花白，木兰本素艳，风吹腻粉开；清明春深处，桐花落，麦花写信，柳花读；待到谷雨，牡丹花前绘满月，荼蘼一开，楝花蔌蔌落清香，何尝不是一个女子对岁月最深情的落款。<br><img src="https://sarience.github.io/img/pic/about.png" alt=""></p>
@@ -1745,12 +1751,6 @@ an instanceof Cat:             false
     <entry>
       <title><![CDATA[tags]]></title>
       <url>/tags/index.html</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[gallery]]></title>
-      <url>/gallery/index.html</url>
       <content type="html"></content>
     </entry>
     
